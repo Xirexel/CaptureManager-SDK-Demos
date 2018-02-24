@@ -1,0 +1,82 @@
+﻿<Window x:Class="WPFMultiSourceRecorder.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:WPFMultiSourceRecorder"
+        Loaded="Window_Loaded"
+        Title="MainWindow" Height="350" Width="525">
+    <Window.Resources>
+        <XmlDataProvider x:Key="XmlSources" XPath="Sources/Source"/>
+        <XmlDataProvider x:Key="XmlEncoders"/>
+        <XmlDataProvider x:Key="XmlEncoderModeProvider" XPath="EncoderMediaTypes/Group"/>
+        <XmlDataProvider x:Key="XmlContainerTypeProvider" XPath="SinkFactories/SinkFactory[@GUID='{D6E342E3-7DDD-4858-AB91-4253643864C2}']/Value.ValueParts/ValuePart"/>
+        <XmlDataProvider x:Key="XmlAudioEncoderModeProvider" XPath="EncoderMediaTypes/Group"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <ItemsControl x:Name="mSourceItemsControl" Padding="10" BorderBrush="Black" BorderThickness="2">
+            <ItemsControl.ItemsSource>
+                <Binding Source="{StaticResource XmlSources}"/>
+            </ItemsControl.ItemsSource>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <local:SourceControl x:Name="mSourceControl">
+                        <local:SourceControl.FriendlyName>
+                            <Binding XPath="Source.Attributes/Attribute[@Name='MF_DEVSOURCE_ATTRIBUTE_FRIENDLY_NAME']/SingleValue/@Value" />
+                        </local:SourceControl.FriendlyName>
+                        <!--<local:SourceControl.Tag>
+                            <Binding XPath="PresentationDescriptor" />
+                        </local:SourceControl.Tag>-->
+                    </local:SourceControl>
+                    <DataTemplate.Triggers>
+                        <DataTrigger Value="MFMediaType_Video">
+                            <DataTrigger.Binding>
+                                <Binding XPath="Source.Attributes/Attribute[@Name='MF_DEVSOURCE_ATTRIBUTE_MEDIA_TYPE']/Value.ValueParts/ValuePart/@Value"/>
+                            </DataTrigger.Binding>
+                            <Setter TargetName="mSourceControl" Property="SymbolicLink">
+                                <Setter.Value>
+                                    <Binding XPath="Source.Attributes/Attribute[@Name='MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE_VIDCAP_SYMBOLIC_LINK']/SingleValue/@Value"/>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="mSourceControl" Property="TypeSource" Value="Video"/>
+                        </DataTrigger>
+                        <DataTrigger Value="MFMediaType_Audio">
+                            <DataTrigger.Binding>
+                                <Binding XPath="Source.Attributes/Attribute[@Name='MF_DEVSOURCE_ATTRIBUTE_MEDIA_TYPE']/Value.ValueParts/ValuePart/@Value"/>
+                            </DataTrigger.Binding>
+                            <Setter TargetName="mSourceControl" Property="SymbolicLink">
+                                <Setter.Value>
+                                    <Binding XPath="Source.Attributes/Attribute[@Name='MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE_AUDCAP_SYMBOLIC_LINK']/SingleValue/@Value"/>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="mSourceControl" Property="TypeSource" Value="Audio"/>
+                        </DataTrigger>
+                        <DataTrigger Value="MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE_AUDCAP_GUID">
+                            <DataTrigger.Binding>
+                                <Binding XPath="Source.Attributes/Attribute[@Name='MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE']/SingleValue/@Value"/>
+                            </DataTrigger.Binding>
+                            <Setter TargetName="mSourceControl" Property="SymbolicLink">
+                                <Setter.Value>
+                                    <Binding XPath="Source.Attributes/Attribute[@Name='MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE_AUDCAP_SYMBOLIC_LINK']/SingleValue/@Value"/>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="mSourceControl" Property="TypeSource" Value="Audio"/>                            
+                        </DataTrigger>                      
+                        
+                        
+                    </DataTemplate.Triggers>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <Grid Grid.Row="1" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="mSelectFileBtn" Click="mSelectFileBtn_Click" IsEnabled="False" FontSize="25" HorizontalAlignment="Right" Margin="10" Content="Select output file"/>
+            <Button x:Name="m_StartStopBtn" Click="mControlBtn_Click" FontSize="25" IsEnabled="False" HorizontalAlignment="Left" Margin="10" Grid.Column="1" Content="Start"/>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,40 @@
+﻿<Window x:Class="WPFImageViewer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	    xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+        Title="MainWindow" Height="500" Width="800"
+        Closing="Window_Closing" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="45"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Button Click="mLaunchButton_Click" x:Name="mLaunchButton" Width="160" Height="40" Content="Launch" FontSize="28" Grid.Row="0" Grid.Column="0">
+                <Button.Style>
+                    <Style>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=mMediaTypesComboBox, Path=SelectedIndex}"
+                                             Value="-1">
+                                <Setter Property="FrameworkElement.IsEnabled"
+                                            Value="False"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <Canvas x:Name="mCanvas" Grid.Row="1" Grid.Column="0">
+
+                <WindowsFormsHost Width="{Binding ElementName=mCanvas, Path=ActualWidth}"
+                       Height="{Binding ElementName=mCanvas, Path=ActualHeight}">
+                    <wf:Panel x:Name="mVideoPanel" BackColor="Blue" Height="100" Width="100"/>
+                </WindowsFormsHost>
+            </Canvas>
+        </Grid>
+    </Grid>
+</Window>
