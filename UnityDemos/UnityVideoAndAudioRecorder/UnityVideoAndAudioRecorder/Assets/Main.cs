@@ -35,6 +35,7 @@ public class Main : MonoBehaviour {
         System.IntPtr aAudioSymbolicLink,
         int aAudioStreamIndex,
         int aAudioMediaTypeIndex,
+        int aCompressionQuality,
         System.IntPtr aVideoEncoderIID,
         System.IntPtr aVideoEncoderModeIID,
         int aVideoCompressedMediaTypeIndex,
@@ -116,6 +117,11 @@ public class Main : MonoBehaviour {
     public Dropdown audioEncoderModeDropdown = null;
 
     public Dropdown audioEncoderMediaTypeDropdown = null;
+
+
+    public GameObject compressionPanel = null;
+
+    public Slider compressionSlider = null;
 
 
     public Button startStopBtn = null;
@@ -827,6 +833,8 @@ public class Main : MonoBehaviour {
 
         Marshal.FreeBSTR(lBSTR);
 
+        Debug.Log(lxmldoc);
+
         XmlDocument doc = new XmlDocument();
 
         doc.LoadXml(lxmldoc);
@@ -877,17 +885,51 @@ public class Main : MonoBehaviour {
                             l_MediaTypeData.mFriendlyData += ", " + l_MediaTypeNode.SelectSingleNode("MediaTypeItem[@Name='MF_MT_FRAME_RATE']/RatioValue/@Value").Value;
 
                             l_MediaTypeData.mFriendlyData += ", " + l_MediaTypeNode.SelectSingleNode("MediaTypeItem[@Name='MF_MT_SUBTYPE']/SingleValue/@Value").Value.Replace("MFVideoFormat_", "");
-
+                            
+                            var ltempNode = l_MediaTypeNode.SelectSingleNode("MediaTypeItem[@Name='MF_MT_MPEG2_PROFILE']/SingleValue/@Value");
+                        
+                            if (ltempNode != null)
+                            {
+                                switch (ltempNode.Value)
+	                            {
+                                    case "66":
+                                        l_MediaTypeData.mFriendlyData += ", " + "Baseline Profile";
+                                        break;
+                                    case "77":
+                                        l_MediaTypeData.mFriendlyData += ", " + "Main Profile";
+                                        break;
+                                    case "100":
+                                        l_MediaTypeData.mFriendlyData += ", " + "High Profile";
+                                        break;
+		                            default:
+                                        break;
+	                            }
+                            }   
                         }
                         else
                         {
-                            l_MediaTypeData.mFriendlyData = l_MediaTypeNode.SelectSingleNode("MediaTypeItem[@Name='MF_MT_AUDIO_BITS_PER_SAMPLE']/SingleValue/@Value").Value;
+                            var ltempNode = l_MediaTypeNode.SelectSingleNode("MediaTypeItem[@Name='MF_MT_AUDIO_BITS_PER_SAMPLE']/SingleValue/@Value");
+
+                            if (ltempNode != null)
+                                l_MediaTypeData.mFriendlyData = ltempNode.Value;
 
                             l_MediaTypeData.mFriendlyData += " x " + l_MediaTypeNode.SelectSingleNode("MediaTypeItem[@Name='MF_MT_AUDIO_NUM_CHANNELS']/SingleValue/@Value").Value;
 
                             l_MediaTypeData.mFriendlyData += ", " + l_MediaTypeNode.SelectSingleNode("MediaTypeItem[@Name='MF_MT_AUDIO_SAMPLES_PER_SECOND']/SingleValue/@Value").Value;
 
                             l_MediaTypeData.mFriendlyData += ", " + l_MediaTypeNode.SelectSingleNode("MediaTypeItem[@Name='MF_MT_SUBTYPE']/SingleValue/@Value").Value.Replace("MFAudioFormat_", "");
+                        
+                            ltempNode = l_MediaTypeNode.SelectSingleNode("MediaTypeItem[@Name='MF_MT_AUDIO_AVG_BYTES_PER_SECOND']/SingleValue/@Value");
+                        
+                            if (ltempNode != null)
+                            {
+                                int l_value = 0;
+
+                                if(int.TryParse(ltempNode.Value, out l_value))
+                                {
+                                    l_MediaTypeData.mFriendlyData += ", " + (l_value * 8)/1000 + " kbits";
+                                }
+                            }                                                
                         }
                         
                         l_StreamData.mMediaTypes.Add(l_MediaTypeData);
@@ -911,10 +953,23 @@ public class Main : MonoBehaviour {
             fileFormatDropdown.gameObject.SetActive(false);
 
             fileNameInputField.gameObject.SetActive(false);
+
+
+            if (compressionPanel != null)
+                compressionPanel.SetActive(false);
+
+            if (compressionSlider != null)
+                compressionSlider.gameObject.SetActive(false);   
         }
         else
         {
             fileFormatDropdown.gameObject.SetActive(true);
+            
+            if (compressionPanel != null)
+                compressionPanel.SetActive(true);
+
+            if (compressionSlider != null)
+                compressionSlider.gameObject.SetActive(true);   
         }
     }
     
@@ -1046,7 +1101,13 @@ public class Main : MonoBehaviour {
 
             audioEncoderMediaTypeDropdown.ClearOptions();
         }
-        
+
+        if (compressionPanel != null)
+            compressionPanel.SetActive(false);
+
+        if (compressionSlider != null)
+            compressionSlider.gameObject.SetActive(false);        
+
         if (fileFormatDropdown != null)
             fileFormatDropdown.gameObject.SetActive(false);
 
@@ -1320,6 +1381,11 @@ public class Main : MonoBehaviour {
         var lcurrentAudioEncoderModeBSTR = Marshal.StringToBSTR(m_currentAudioEncoderMode);
 
 
+        int lqualityCompression = 50;
+
+        if (compressionSlider != null)
+            lqualityCompression = (int)(compressionSlider.value * 100.0f);
+
 
         startRecording(
         lVideoSymbolicLinkBSTR,
@@ -1328,6 +1394,7 @@ public class Main : MonoBehaviour {
         lAudioSymbolicLinkBSTR,
         audioStreamDropdown.value - 1,
         audioMediaTypeDropdown.value - 1,
+        lqualityCompression,
         lVideoEncoderCLSIDBSTR,
         lcurrentVideoEncoderModeBSTR,
         videoEncoderMediaTypeDropdown.value - 1,

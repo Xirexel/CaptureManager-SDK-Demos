@@ -90,6 +90,7 @@ extern "C" void	UNITY_INTERFACE_EXPORT UNITY_INTERFACE_API startRecording(
 	BSTR aAudioSymbolicLink,
 	int aAudioStreamIndex,
 	int aAudioMediaTypeIndex,
+	int aCompressionQuality,
 	BSTR aVideoEncoderIID,
 	BSTR aVideoEncoderModeIID,
 	int aVideoCompressedMediaTypeIndex,
@@ -105,6 +106,12 @@ extern "C" void	UNITY_INTERFACE_EXPORT UNITY_INTERFACE_API startRecording(
 
 	if (texture == nullptr)
 		return;
+
+	if (aCompressionQuality < 10)
+		aCompressionQuality = 10;
+
+	if (aCompressionQuality > 100)
+		aCompressionQuality = 100;
 
 
 	g_Recorder.reset(g_RecorderFactory.createRecorder(
@@ -151,9 +158,9 @@ extern "C" void	UNITY_INTERFACE_EXPORT UNITY_INTERFACE_API startRecording(
 			}
 			
 			if (lSurface)
-				g_Recorder->startPreviewAndRecording(lSurface, false, aFileName);
+				g_Recorder->startPreviewAndRecording(lSurface, aCompressionQuality, false, aFileName);
 			else
-				g_Recorder->startPreviewAndRecording(g_ptrBaseUnknown, false, aFileName);
+				g_Recorder->startPreviewAndRecording(g_ptrBaseUnknown, aCompressionQuality, false, aFileName);
 		}
 		catch (...)
 		{

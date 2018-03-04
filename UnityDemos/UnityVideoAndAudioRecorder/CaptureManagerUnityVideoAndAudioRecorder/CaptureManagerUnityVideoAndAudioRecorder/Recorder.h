@@ -38,6 +38,7 @@ public:
 
 	virtual void startPreviewAndRecording(
 		void* aPtrWindow,
+		int aCompressionQuality,
 		bool aEnableInnerRenderer, 
 		std::wstring aFilePath);
 

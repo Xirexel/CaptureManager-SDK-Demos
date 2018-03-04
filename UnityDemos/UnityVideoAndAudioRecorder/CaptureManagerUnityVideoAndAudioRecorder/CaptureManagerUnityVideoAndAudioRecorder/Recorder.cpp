@@ -85,6 +85,7 @@ HRESULT createSourceMediaType(
 
 HRESULT createCompresssedMediaType(
 	IUnknown* aPtrSourceMediaType,
+	int aCompressionQuality,
 	REFGUID aRefEncodingModeGUID,
 	DWORD aIndexCompressedMediaType,
 	IEncoderNodeFactory* aPtrEncoderNodeFactory,
@@ -99,6 +100,7 @@ HRESULT createOutputNodes(
 
 HRESULT createEncoderNode(
 	IUnknown* aPtrSourceMediaType,
+	int aCompressionQuality,
 	REFGUID aRefEncodingModeGUID,
 	DWORD aIndexCompressedMediaType,
 	IEncoderNodeFactory* aPtrEncoderNodeFactory,
@@ -351,6 +353,7 @@ void Recorder::startPreview(void* aPtrWindow, bool aEnableInnerRenderer)
 
 void Recorder::startPreviewAndRecording(
 	void* aPtrWindow,
+	int aCompressionQuality,
 	bool aEnableInnerRenderer,
 	std::wstring aFilePath)
 {
@@ -458,6 +461,7 @@ void Recorder::startPreviewAndRecording(
 		{
 			createCompresssedMediaType(
 				lVideoSourceMediaType,
+				aCompressionQuality,
 				VideoCompressionEncoderModeCLSID,
 				mVideoCompressionMediaTypeIndex,
 				g_VideoEncoderNodeFactory,
@@ -499,6 +503,7 @@ void Recorder::startPreviewAndRecording(
 		{
 			createCompresssedMediaType(
 				lAudioSourceMediaType,
+				aCompressionQuality,
 				AudioCompressionEncoderModeCLSID,
 				mAudioCompressionMediaTypeIndex,
 				g_AudioEncoderNodeFactory,
@@ -546,6 +551,7 @@ void Recorder::startPreviewAndRecording(
 		{
 			lhresult = createEncoderNode(
 				lVideoSourceMediaType,
+				aCompressionQuality,
 				VideoCompressionEncoderModeCLSID,
 				mVideoCompressionMediaTypeIndex,
 				g_VideoEncoderNodeFactory,
@@ -598,6 +604,7 @@ void Recorder::startPreviewAndRecording(
 
 			lhresult = createEncoderNode(
 				lAudioSourceMediaType,
+				aCompressionQuality,
 				AudioCompressionEncoderModeCLSID,
 				mAudioCompressionMediaTypeIndex,
 				g_AudioEncoderNodeFactory,
@@ -1199,6 +1206,7 @@ HRESULT createSourceMediaType(
 
 HRESULT createCompresssedMediaType(
 	IUnknown* aPtrSourceMediaType,
+	int aCompressionQuality,
 	REFGUID aRefEncodingModeGUID,
 	DWORD aIndexCompressedMediaType,
 	IEncoderNodeFactory* aPtrEncoderNodeFactory,
@@ -1220,7 +1228,7 @@ HRESULT createCompresssedMediaType(
 		lhresult = aPtrEncoderNodeFactory->createCompressedMediaType(
 			aPtrSourceMediaType,
 			aRefEncodingModeGUID,
-			50,
+			aCompressionQuality,
 			aIndexCompressedMediaType,
 			aPtrPtrUnkCompresssedMediaType);
 
@@ -1362,6 +1370,7 @@ HRESULT createOutputNodes(
 
 HRESULT createEncoderNode(
 	IUnknown* aPtrSourceMediaType,
+	int aCompressionQuality,
 	REFGUID aRefEncodingModeGUID,
 	DWORD aIndexCompressedMediaType,
 	IEncoderNodeFactory* aPtrEncoderNodeFactory,
@@ -1387,7 +1396,7 @@ HRESULT createEncoderNode(
 		lhresult = aPtrEncoderNodeFactory->createEncoderNode(
 			aPtrSourceMediaType,
 			aRefEncodingModeGUID,
-			50,
+			aCompressionQuality,
 			aIndexCompressedMediaType,
 			aPtrUnkOutputNode,
 			aPtrPtrUnkEncoderNode);
