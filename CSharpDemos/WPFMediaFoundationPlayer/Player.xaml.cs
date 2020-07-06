@@ -98,7 +98,12 @@ namespace WPFMediaFoundationPlayer
         {
             try
             {
-                MFError throwonhr = MFExtern.MFCreateMediaSession(null, out m_pSession);
+                MFError throwonhr = null;
+
+                if (m_pSession == null)
+                    throwonhr = MFExtern.MFCreateMediaSession(null, out m_pSession);
+                else
+                    Stop();
 
                 // Create the media source.
 
@@ -123,7 +128,7 @@ namespace WPFMediaFoundationPlayer
 
                 HResult hr = HResult.S_OK;
                 // Set the topology on the media session.
-                hr = m_pSession.SetTopology(0, pTopology);
+                hr = m_pSession.SetTopology(MFSessionSetTopologyFlags.Immediate, pTopology);
 
                 StartPlayback();
 
@@ -339,8 +344,10 @@ namespace WPFMediaFoundationPlayer
                     // Create the video renderer.
                     //TRACE(string.Format("Stream {0}: video stream", streamID));
                     //throwonhr = MFExtern.MFCreateVideoRendererActivate(m_hwndVideo, out pRendererActivate);
+                    
+                    mIMFTopologyNode.GetObject(out pRendererActivate);
 
-                    pNode = mIMFTopologyNode;
+                    throwonhr = pNode.SetObject(pRendererActivate);
                 }
                 else
                 {

@@ -72,6 +72,8 @@ namespace WPFImageViewer
                     mISession.closeSession();
 
                     mLaunchButton.Content = "Launch";
+
+                    GC.Collect();
                 }
 
                 mISession = null;
@@ -247,6 +249,8 @@ namespace WPFImageViewer
 
                 e.Cancel = true;
             }
+
+            GC.Collect();
         }
     }
 }

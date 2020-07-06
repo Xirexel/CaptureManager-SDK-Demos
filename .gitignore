@@ -28,3 +28,11 @@
 # Executables
 *.out
 *.app
+
+[Dd]ebug/
+[Rr]elease/
+[Oo]bj/
+[Pp]ackages/
+
+!CSharpDemos/3rdparty/openssl-1.1.0/lib*/*.lib
+CSharpDemos/.vs/

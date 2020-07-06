@@ -1,0 +1,136 @@
+﻿<Window x:Class="WPFAreaScreenRecorder.ControlWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:display="clr-namespace:WPFAreaScreenRecorder"      
+        Loaded="Window_Loaded"
+        WindowStartupLocation="CenterScreen"
+        Title="ControlWindow" Height="200" Width="600">
+    <Window.Resources>
+        <XmlDataProvider x:Key="XmlSources" XPath="Sources/Source"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" VerticalAlignment="Center" Orientation="Vertical">
+                <TextBlock FontSize="18" Text="Select screen:" TextAlignment="Center"/>
+                <ComboBox SelectionChanged="m_VideoSourceComboBox_SelectionChanged" Margin="5, 2.5" IsEnabled="True" x:Name="m_VideoSourceComboBox">
+                    <ComboBox.ItemsSource>
+                        <Binding Source="{StaticResource XmlSources}"
+                                     XPath="//*[Source.Attributes/Attribute[@Name='MF_DEVSOURCE_ATTRIBUTE_MEDIA_TYPE']/Value.ValueParts/ValuePart[@Value='MFMediaType_Video'] and Source.Attributes/Attribute[@Name='MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE_VIDCAP_HW_SOURCE']/SingleValue[@Value='Software device']]"/>
+                    </ComboBox.ItemsSource>
+
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock x:Name="mtitleTextblock" Tag=""/>
+                            </StackPanel>
+                            <DataTemplate.Triggers>
+                                <DataTrigger Binding="{Binding Path=Name}" Value="Source">
+                                    <Setter TargetName="mtitleTextblock" Property="Text">
+                                        <Setter.Value>
+                                            <Binding XPath="Source.Attributes/Attribute[@Name='MF_DEVSOURCE_ATTRIBUTE_FRIENDLY_NAME']/SingleValue/@Value" />
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter TargetName="mtitleTextblock" Property="ToolTip">
+                                        <Setter.Value>
+                                            <Binding XPath="Source.Attributes/Attribute[@Name='MF_DEVSOURCE_ATTRIBUTE_FRIENDLY_NAME']/SingleValue/@Description" />
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter TargetName="mtitleTextblock" Property="Tag">
+                                        <Setter.Value>
+                                            <Binding XPath="Source.Attributes/Attribute[@Name='MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE_VIDCAP_SYMBOLIC_LINK']/SingleValue/@Value" />
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                            </DataTemplate.Triggers>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+
+            <Button Click="Button_Click" Margin="50, 0, 50, 10" Content="Config" VerticalAlignment="Bottom">
+                <Button.Style>
+                    <Style>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=m_VideoSourceComboBox, Path=SelectedIndex}"
+                                             Value="-1">
+                                <Setter Property="FrameworkElement.IsEnabled"
+                                            Value="False"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <Button Click="Button_Click_1" Margin="30" Grid.Column="1">
+                <TextBlock x:Name="mAreaLable" TextWrapping="Wrap" TextAlignment="Center" Text="Whole Area"/>
+                <Button.Style>
+                    <Style>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=m_VideoSourceComboBox, Path=SelectedIndex}"
+                                             Value="-1">
+                                <Setter Property="FrameworkElement.IsEnabled"
+                                            Value="False"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <Button x:Name="mStartStop" Click="mStartStop_Click" Margin="30" Grid.Column="2" Content="Start">
+                <Button.Style>
+                    <Style>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=m_VideoSourceComboBox, Path=SelectedIndex}"
+                                             Value="-1">
+                                <Setter Property="FrameworkElement.IsEnabled"
+                                            Value="False"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <Grid Grid.Column="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <CheckBox x:Name="m_VideoStreamPreviewChkBtn" IsChecked="True" Margin="5">
+                    <TextBlock Text="Select video preview"/>
+                </CheckBox>
+                <Border Grid.Row="1" BorderBrush="Black" BorderThickness="2" IsEnabled="{Binding ElementName=m_VideoStreamPreviewChkBtn, Path=IsChecked}" >
+                    <display:EVRDisplay x:Name="m_EVRDisplay" />
+                    <Border.Style>
+                        <Style TargetType="Border">
+                            <Style.Triggers>
+                                <Trigger Property="FrameworkElement.IsEnabled" Value="True">
+                                    <Setter Property="Background"
+                                                Value="Black"/>
+                                </Trigger>
+                                <Trigger Property="FrameworkElement.IsEnabled" Value="False">
+                                    <Setter Property="Background"
+                                                Value="Gray"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                </Border>
+            </Grid>
+        </Grid>
+
+        <StatusBar Grid.Row="1">
+            <TextBlock  x:Name="mStatus" />
+        </StatusBar>
+     
+    </Grid>
+</Window>

@@ -1,0 +1,65 @@
+﻿<Window x:Class="WPFAreaScreenRecorder.AreaWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        AllowsTransparency="True"
+        Topmost="True"
+        WindowStyle="None"
+        Background="Transparent" ResizeMode="NoResize">
+    <Window.Resources>
+        <Storyboard x:Key="MarchingAnts">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" 
+                                           Storyboard.TargetName="border" 
+                                           Storyboard.TargetProperty="(Shape.StrokeDashOffset)" 
+                                           RepeatBehavior="Forever">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.5000000" Value="10"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard Storyboard="{StaticResource MarchingAnts}"/>
+        </EventTrigger>
+    </Window.Triggers>
+
+    <Grid x:Name="LayoutRoot"  Background="#6f000000">
+        <Viewbox Stretch="Uniform">
+            <Grid>
+                <TextBlock Text="Selection Area" Foreground="#afffffff" Margin="5,0,5,2"/>
+            </Grid>
+        </Viewbox>
+        <Canvas x:Name="canvas" Background="#00000000">
+            <Grid Background="#14000000" Visibility="Hidden" x:Name="rectangle">
+                <Viewbox Stretch="Uniform">
+                    <TextBlock Margin="10" TextAlignment="Center" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        Press Left Button of Mouse for moving
+                        <LineBreak/><LineBreak/>
+                        For selection click Right Button of Mouse
+                    </TextBlock>
+                </Viewbox>
+                <Rectangle Fill="#00000000" StrokeDashArray="5" Stroke="#FFFFFFFF"     
+                           x:Name="border"
+                       StrokeDashOffset="0" StrokeThickness="1" RadiusX="0" RadiusY="0"                       
+                       MouseLeftButtonDown="rectangle_MouseLeftButtonDown"
+                       MouseLeftButtonUp="rectangle_MouseLeftButtonUp"
+                       MouseMove="rectangle_MouseMove"
+                       MouseLeave="rectangle_MouseLeave"
+                       
+                       >
+
+                    <Rectangle.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Click="MenuItem_Click" Header="Select region"/>
+                        </ContextMenu>
+                    </Rectangle.ContextMenu>
+                </Rectangle>
+            </Grid>
+
+            <Canvas.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Click="MenuItem_Click_1" Header="Select whole area"/>
+                </ContextMenu>
+            </Canvas.ContextMenu>
+        </Canvas>
+    </Grid>
+</Window>
