@@ -2,4 +2,4 @@
 Demo programs for CaptureManager-SDK. 
 
 # Support this project
-*[Thanks for buying me a coffee](https://www.buymeacoffee.com/capturemanager)*
+<a href="https://www.buymeacoffee.com/capturemanager" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-blue.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" ></a>
