@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{901F6437-2BCB-493B-B6EC-4F5483F62468}</ProjectGuid>
+    <ProjectGuid>{BD0CC19D-0D5E-4BBE-8E2D-735C98B5CC97}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>WPFMixer</RootNamespace>
-    <AssemblyName>WPFMixer</AssemblyName>
+    <RootNamespace>WPFStreamingAudioRenderer</RootNamespace>
+    <AssemblyName>WPFStreamingAudioRenderer</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -58,7 +58,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="VideoPanel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -67,16 +66,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ImageCaptureProcessor.cs" />
-    <Compile Include="Interop\ComInterface.cs" />
-    <Compile Include="Interop\Direct3D9.cs" />
-    <Compile Include="Interop\Direct3D9Ex.cs" />
-    <Compile Include="Interop\Direct3DDevice9.cs" />
-    <Compile Include="Interop\Direct3DDevice9Ex.cs" />
-    <Compile Include="Interop\Direct3DSurface9.cs" />
-    <Compile Include="Interop\Direct3DTexture9.cs" />
-    <Compile Include="Interop\NativeMethods.cs" />
-    <Compile Include="Interop\NativeStructs.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

@@ -82,6 +82,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFMixer", "WPFMixer\WPFMix
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFGIFtoVideo", "WPFGIFtoVideo\WPFGIFtoVideo.csproj", "{E897E5F8-5CD3-488E-8055-F6F1B08913AF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFStreamingAudioRenderer", "WPFStreamingAudioRenderer\WPFStreamingAudioRenderer.csproj", "{BD0CC19D-0D5E-4BBE-8E2D-735C98B5CC97}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1208,6 +1210,36 @@ Global
 		{E897E5F8-5CD3-488E-8055-F6F1B08913AF}.Release|x64.Build.0 = Release|Any CPU
 		{E897E5F8-5CD3-488E-8055-F6F1B08913AF}.Release|x86.ActiveCfg = Release|Any CPU
 		{E897E5F8-5CD3-488E-8055-F6F1B08913AF}.Release|x86.Build.0 = Release|Any CPU
+		{BD0CC19D-0D5E-4BBE-8E2D-735C98B5CC97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD0CC19D-0D5E-4BBE-8E2D-735C98B5CC97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD0CC19D-0D5E-4BBE-8E2D-735C98B5CC97}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{BD0CC19D-0D5E-4BBE-8E2D-735C98B5CC97}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{BD0CC19D-0D5E-4BBE-8E2D-735C98B5CC97}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{BD0CC19D-0D5E-4BBE-8E2D-735C98B5CC97}.Debug|Win32.Build.0 = Debug|Any CPU
+		{BD0CC19D-0D5E-4BBE-8E2D-735C98B5CC97}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{BD0CC19D-0D5E-4BBE-8E2D-735C98B5CC97}.Debug|x64.Build.0 = Debug|Any CPU
+		{BD0CC19D-0D5E-4BBE-8E2D-735C98B5CC97}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BD0CC19D-0D5E-4BBE-8E2D-735C98B5CC97}.Debug|x86.Build.0 = Debug|Any CPU
+		{BD0CC19D-0D5E-4BBE-8E2D-735C98B5CC97}.Devel|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD0CC19D-0D5E-4BBE-8E2D-735C98B5CC97}.Devel|Any CPU.Build.0 = Debug|Any CPU
+		{BD0CC19D-0D5E-4BBE-8E2D-735C98B5CC97}.Devel|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{BD0CC19D-0D5E-4BBE-8E2D-735C98B5CC97}.Devel|Mixed Platforms.Build.0 = Debug|Any CPU
+		{BD0CC19D-0D5E-4BBE-8E2D-735C98B5CC97}.Devel|Win32.ActiveCfg = Debug|Any CPU
+		{BD0CC19D-0D5E-4BBE-8E2D-735C98B5CC97}.Devel|Win32.Build.0 = Debug|Any CPU
+		{BD0CC19D-0D5E-4BBE-8E2D-735C98B5CC97}.Devel|x64.ActiveCfg = Debug|Any CPU
+		{BD0CC19D-0D5E-4BBE-8E2D-735C98B5CC97}.Devel|x64.Build.0 = Debug|Any CPU
+		{BD0CC19D-0D5E-4BBE-8E2D-735C98B5CC97}.Devel|x86.ActiveCfg = Debug|Any CPU
+		{BD0CC19D-0D5E-4BBE-8E2D-735C98B5CC97}.Devel|x86.Build.0 = Debug|Any CPU
+		{BD0CC19D-0D5E-4BBE-8E2D-735C98B5CC97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD0CC19D-0D5E-4BBE-8E2D-735C98B5CC97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD0CC19D-0D5E-4BBE-8E2D-735C98B5CC97}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{BD0CC19D-0D5E-4BBE-8E2D-735C98B5CC97}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{BD0CC19D-0D5E-4BBE-8E2D-735C98B5CC97}.Release|Win32.ActiveCfg = Release|Any CPU
+		{BD0CC19D-0D5E-4BBE-8E2D-735C98B5CC97}.Release|Win32.Build.0 = Release|Any CPU
+		{BD0CC19D-0D5E-4BBE-8E2D-735C98B5CC97}.Release|x64.ActiveCfg = Release|Any CPU
+		{BD0CC19D-0D5E-4BBE-8E2D-735C98B5CC97}.Release|x64.Build.0 = Release|Any CPU
+		{BD0CC19D-0D5E-4BBE-8E2D-735C98B5CC97}.Release|x86.ActiveCfg = Release|Any CPU
+		{BD0CC19D-0D5E-4BBE-8E2D-735C98B5CC97}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
