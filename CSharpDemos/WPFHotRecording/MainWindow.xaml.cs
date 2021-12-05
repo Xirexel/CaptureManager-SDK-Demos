@@ -232,23 +232,8 @@ namespace WPFHotRecording
                     return;
 
                 string lSymbolicLink = lNode.Value;
-
-                lSourceNode = m_VideoStreamComboBox.SelectedItem as XmlNode;
-
-                if (lSourceNode == null)
-                    return;
-
-                lNode = lSourceNode.SelectSingleNode("@Index");
-
-                if (lNode == null)
-                    return;
-
+                
                 uint lStreamIndex = 0;
-
-                if (!uint.TryParse(lNode.Value, out lStreamIndex))
-                {
-                    return;
-                }
 
                 lSourceNode = m_VideoSourceMediaTypeComboBox.SelectedItem as XmlNode;
 
@@ -566,12 +551,7 @@ namespace WPFHotRecording
 
                 if (aSourceNode == null)
                     break;
-
-
-                if (aStreamNode == null)
-                    break;
-
-
+                               
                 if (aMediaTypeNode == null)
                     break;
 
@@ -618,20 +598,7 @@ namespace WPFHotRecording
 
                 string lSymbolicLink = lNode.Value;
 
-                if (aStreamNode == null)
-                    break;
-
-                lNode = aStreamNode.SelectSingleNode("@Index");
-
-                if (lNode == null)
-                    break;
-
                 uint lStreamIndex = 0;
-
-                if (!uint.TryParse(lNode.Value, out lStreamIndex))
-                {
-                    break;
-                }
 
                 if (aMediaTypeNode == null)
                     break;
@@ -766,11 +733,6 @@ namespace WPFHotRecording
                 if (aSourceNode == null)
                     break;
 
-
-                if (aStreamNode == null)
-                    break;
-
-
                 if (aMediaTypeNode == null)
                     break;
 
@@ -817,20 +779,7 @@ namespace WPFHotRecording
 
                 string lSymbolicLink = lNode.Value;
 
-                if (aStreamNode == null)
-                    break;
-
-                lNode = aStreamNode.SelectSingleNode("@Index");
-
-                if (lNode == null)
-                    break;
-
                 uint lStreamIndex = 0;
-
-                if (!uint.TryParse(lNode.Value, out lStreamIndex))
-                {
-                    break;
-                }
 
                 if (aMediaTypeNode == null)
                     break;
@@ -930,12 +879,7 @@ namespace WPFHotRecording
 
                 if (aSourceNode == null)
                     break;
-
-
-                if (aStreamNode == null)
-                    break;
-
-
+                               
                 if (aMediaTypeNode == null)
                     break;
 
@@ -982,20 +926,7 @@ namespace WPFHotRecording
 
                 string lSymbolicLink = lNode.Value;
 
-                if (aStreamNode == null)
-                    break;
-
-                lNode = aStreamNode.SelectSingleNode("@Index");
-
-                if (lNode == null)
-                    break;
-
                 uint lStreamIndex = 0;
-
-                if (!uint.TryParse(lNode.Value, out lStreamIndex))
-                {
-                    break;
-                }
 
                 if (aMediaTypeNode == null)
                     break;

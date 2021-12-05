@@ -93,21 +93,7 @@ namespace WPFStreamer
                     );
 
             }
-
-            //private Direct3DTexture9 GetSharedSurface(Direct3DDevice9 device)
-            //{
-
-            //    return device.CreateTexture(
-            //        m_width,
-            //        m_height,
-            //        1,
-            //        1,  //D3DUSAGE_RENDERTARGET
-            //        Format, 
-            //        0  //D3DPOOL_DEFAULT
-            //        );                
-            //}
-
-
+            
 
             private static Interop.Direct3DDevice9Ex CreateDevice(IntPtr handle)
             {

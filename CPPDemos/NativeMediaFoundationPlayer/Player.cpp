@@ -2,7 +2,7 @@
 #include "resource.h"
 
 #include "CaptureManagerVideoRendererFactory.h"
-#include "Common\CaptureManagerTypeInfo.h"
+#include "../Common/CaptureManagerTypeInfo.h"
 
 #include "Direct3D9Renderer.h"
 #include "RendererFactory.h"
@@ -278,6 +278,9 @@ HRESULT CPlayer::OpenURL(const WCHAR *sURL)
 	default:
 		break;
 	}
+
+	if (!lUnkTopologyNode)
+		return E_FAIL;
 
 	lRenderMFSink = lUnkTopologyNode;
 			

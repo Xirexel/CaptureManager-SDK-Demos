@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml;
+using Tools;
 
 namespace WPFMultiSourceRecorder
 {
@@ -163,15 +164,30 @@ namespace WPFMultiSourceRecorder
                 if (m_StreamComboBox.SelectedIndex < 0)
                     return;
                 
-                uint lStreamIndex = (uint)m_StreamComboBox.SelectedIndex;
+                uint lStreamIndex = 0;
 
 
 
                 if (m_MediaTypeComboBox.SelectedIndex < 0)
                     return;
-                
-                uint lMediaTypeIndex = (uint)m_MediaTypeComboBox.SelectedIndex;
-                
+
+                var lMediaType = m_MediaTypeComboBox.SelectedItem as XmlNode;
+
+                if (lMediaType == null)
+                    return;
+
+                var lNode = lMediaType.SelectSingleNode("@Index");
+
+                if (lNode == null)
+                    return;
+
+                uint lMediaTypeIndex = 0;
+
+                if (!uint.TryParse(lNode.Value, out lMediaTypeIndex))
+                {
+                    return;
+                }
+                                
                 object lOutputMediaType;
 
                 if (mSourceControl == null)
@@ -492,6 +508,25 @@ namespace WPFMultiSourceRecorder
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)
         {
             MainWindow.mISourceItems.Remove(this);
+        }
+
+        private void UserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            MediaTypeManager lMediaTypeManager = (MediaTypeManager)this.Resources["mMediaTypeManager"];
+
+            if (lMediaTypeManager == null)
+                return;
+
+            lMediaTypeManager.CurrentSource = DataContext;
+        }
+
+        private void M_MediaTypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var lIndex = m_EncodersComboBox.SelectedIndex;
+
+            m_EncodersComboBox.SelectedIndex = -1;
+
+            m_EncodersComboBox.SelectedIndex = lIndex;
         }
     }
 }

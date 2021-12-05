@@ -2,8 +2,8 @@
 
 #include "CaptureManagerVideoRendererFactory.h"
 
-#include "Common/ComPtrCustom.h"
-#include "Common/CaptureManagerTypeInfo.h"
+#include "../Common/ComPtrCustom.h"
+#include "../Common/CaptureManagerTypeInfo.h"
 #include "CaptureManagerLoader.h"
 #include "CMVRMultiSinkFactoryLoader.h"
 

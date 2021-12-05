@@ -1,6 +1,6 @@
 #include "CaptureManagerLoader.h"
-#include "Common/CaptureManagerTypeInfo.h"
-#include "Common/pugixml.hpp"
+#include "../Common/CaptureManagerTypeInfo.h"
+#include "../Common/pugixml.hpp"
 
 
 
@@ -194,12 +194,7 @@ HRESULT CaptureManagerLoader::init()
 		}
 
 		HMODULE lHCaptureManagerLibrary = LoadLibraryEx(L"CaptureManager.dll", NULL, 0);
-
-		if (lHCaptureManagerLibrary == nullptr)
-		{
-			return -1;
-		}
-
+		
 		CComPtrCustom<IClassFactory> lCoCaptureManager;
 
 		if (lHCaptureManagerLibrary == nullptr)

@@ -3,7 +3,7 @@
 #include "Common.h"
 #include "resource.h"
 #include "IRenderer.h"
-#include "Common\ComPtrCustom.h"
+#include "../Common/ComPtrCustom.h"
 
 
 const UINT WM_APP_PLAYER_EVENT = WM_APP + 1;

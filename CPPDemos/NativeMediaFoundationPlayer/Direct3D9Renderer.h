@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Unknwnbase.h>
-#include "Common\ComPtrCustom.h"
+#include "../Common/ComPtrCustom.h"
 #include "IRenderer.h"
 #include "Common.h"
 

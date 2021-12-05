@@ -4,7 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:render="clr-namespace:WPFVideoAndAudioRecorder"
+             xmlns:tools="clr-namespace:Tools"   
              mc:Ignorable="d" 
+             DataContextChanged="UserControl_DataContextChanged"
              Loaded="UserControl_Loaded"
              Unloaded="UserControl_Unloaded"
              d:DesignHeight="300" d:DesignWidth="300">
@@ -12,6 +14,8 @@
     <UserControl.Resources>
         <XmlDataProvider x:Key="XmlEncoders" />
         <XmlDataProvider x:Key="XmlEncoderModeProvider" XPath="EncoderMediaTypes/Group"/>
+        <tools:SubTypeNameConverter x:Key="mSubTypeNameConverter"/>
+        <tools:MediaTypeManager x:Key="mMediaTypeManager" />
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -31,11 +35,10 @@
                     </Grid.ColumnDefinitions>
                     <StackPanel>
                         <TextBlock Text="Source:" TextAlignment="Center"/>
-                        <ComboBox SelectedIndex="0" Margin="5, 2.5" x:Name="m_StreamComboBox">
-                            <ComboBox.ItemsSource>
-                                <Binding XPath="PresentationDescriptor/StreamDescriptor"/>
-                            </ComboBox.ItemsSource>
-                            <!--<ComboBox.Style>
+                        <ComboBox SelectedIndex="0" ItemsSource="{Binding Source={StaticResource mMediaTypeManager}, Path=SubTypes}"              
+                           SelectedItem="{Binding Source={StaticResource mMediaTypeManager}, Path=CurrentSubType}"
+                       x:Name="m_StreamComboBox"  VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" Margin="5, 2.5">
+                            <ComboBox.Style>
                                 <Style>
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding ElementName=m_VideoSourceComboBox, Path=SelectedIndex}"
@@ -45,44 +48,28 @@
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
-                            </ComboBox.Style>-->
+                            </ComboBox.Style>
 
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock x:Name="mtitleTextblock"/>
+                                        <TextBlock Margin="0,0,2,0" Text="Format: "/>
+                                        <TextBlock Text="{Binding {}, Converter={StaticResource mSubTypeNameConverter}}"/>
                                     </StackPanel>
-                                    <DataTemplate.Triggers>
-                                        <DataTrigger Binding="{Binding XPath=@MajorType}" Value="MFMediaType_Video">
-                                            <Setter TargetName="mtitleTextblock" Property="Text"  Value="Video stream" />
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding XPath=@MajorType}" Value="MFMediaType_Audio">
-                                            <Setter TargetName="mtitleTextblock" Property="Text"  Value="Audio stream" />
-                                        </DataTrigger>
-                                    </DataTemplate.Triggers>
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
-                        <ComboBox SelectedIndex="0" Margin="5, 2.5" DataContext="{Binding ElementName=m_StreamComboBox, Path=SelectedItem}" x:Name="m_MediaTypeComboBox">
-                            <ComboBox.ItemsSource>
-                                <Binding XPath="MediaTypes/MediaType" />
-                            </ComboBox.ItemsSource>
+
+                        <ComboBox x:Name="m_MediaTypeComboBox" SelectedIndex="0" SelectionChanged="M_MediaTypeComboBox_SelectionChanged" ItemsSource="{Binding Source={StaticResource mMediaTypeManager}, Path=MediaTypes}" VerticalAlignment="Center"  Margin="5, 2.5">
 
                             <ComboBox.Style>
                                 <Style>
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding ElementName=m_StreamComboBox, Path=SelectedIndex}"
+                                        <DataTrigger Binding="{Binding ElementName=m_VideoStreamComboBox, Path=SelectedIndex}"
                                              Value="-1">
                                             <Setter Property="FrameworkElement.IsEnabled"
                                             Value="False"/>
                                         </DataTrigger>
-                                        <Trigger Property="FrameworkElement.IsEnabled" Value="True">
-                                            <Setter Property="FrameworkElement.Tag">
-                                                <Setter.Value>
-                                                    <Binding XPath="@MajorTypeGUID"/>
-                                                </Setter.Value>
-                                            </Setter>
-                                        </Trigger>
                                     </Style.Triggers>
                                 </Style>
                             </ComboBox.Style>
@@ -99,15 +86,7 @@
                                         <TextBlock x:Name="mVideoFormatTextblock"/>
                                     </StackPanel>
                                     <DataTemplate.Triggers>
-                                        <MultiDataTrigger>
-                                            <MultiDataTrigger.Conditions>
-                                                <Condition Binding="{Binding Path=Name}" Value="MediaType"/>
-                                                <Condition Value="MFMediaType_Video">
-                                                    <Condition.Binding>
-                                                        <Binding XPath="MediaTypeItem[@Name='MF_MT_MAJOR_TYPE']/SingleValue/@Value" />
-                                                    </Condition.Binding>
-                                                </Condition>
-                                            </MultiDataTrigger.Conditions>
+                                        <DataTrigger Binding="{Binding Path=Name}" Value="MediaType">
                                             <Setter TargetName="mWidthTextblock" Property="Text">
                                                 <Setter.Value>
                                                     <Binding XPath="MediaTypeItem[@Name='MF_MT_FRAME_SIZE']/Value.ValueParts/ValuePart[1]/@Value" />
@@ -125,40 +104,10 @@
                                             </Setter>
                                             <Setter TargetName="mVideoFormatTextblock" Property="Text">
                                                 <Setter.Value>
-                                                    <Binding XPath="MediaTypeItem[@Name='MF_MT_SUBTYPE']/SingleValue/@Value" />
+                                                    <Binding XPath="MediaTypeItem[@Name='MF_MT_SUBTYPE']/SingleValue/@Value" Converter="{StaticResource mSubTypeNameConverter}" />
                                                 </Setter.Value>
                                             </Setter>
-                                        </MultiDataTrigger>
-                                        <MultiDataTrigger>
-                                            <MultiDataTrigger.Conditions>
-                                                <Condition Binding="{Binding Path=Name}" Value="MediaType"/>
-                                                <Condition Value="MFMediaType_Audio">
-                                                    <Condition.Binding>
-                                                        <Binding XPath="MediaTypeItem[@Name='MF_MT_MAJOR_TYPE']/SingleValue/@Value" />
-                                                    </Condition.Binding>
-                                                </Condition>
-                                            </MultiDataTrigger.Conditions>
-                                            <Setter TargetName="mWidthTextblock" Property="Text">
-                                                <Setter.Value>
-                                                    <Binding XPath="MediaTypeItem[@Name='MF_MT_AUDIO_BITS_PER_SAMPLE']/SingleValue/@Value" />
-                                                </Setter.Value>
-                                            </Setter>
-                                            <Setter TargetName="mHeightTextblock" Property="Text">
-                                                <Setter.Value>
-                                                    <Binding XPath="MediaTypeItem[@Name='MF_MT_AUDIO_NUM_CHANNELS']/SingleValue/@Value" />
-                                                </Setter.Value>
-                                            </Setter>
-                                            <Setter TargetName="mFrameRateTextblock" Property="Text">
-                                                <Setter.Value>
-                                                    <Binding XPath="MediaTypeItem[@Name='MF_MT_AUDIO_SAMPLES_PER_SECOND']/SingleValue/@Value" />
-                                                </Setter.Value>
-                                            </Setter>
-                                            <Setter TargetName="mVideoFormatTextblock" Property="Text">
-                                                <Setter.Value>
-                                                    <Binding XPath="MediaTypeItem[@Name='MF_MT_SUBTYPE']/SingleValue/@Value" />
-                                                </Setter.Value>
-                                            </Setter>
-                                        </MultiDataTrigger>
+                                        </DataTrigger>
                                     </DataTemplate.Triggers>
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>

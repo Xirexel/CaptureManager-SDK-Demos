@@ -222,23 +222,8 @@ namespace WPFPauseResumeRecording
                     return;
 
                 string lSymbolicLink = lNode.Value;
-
-                lSourceNode = m_VideoStreamComboBox.SelectedItem as XmlNode;
-
-                if (lSourceNode == null)
-                    return;
-
-                lNode = lSourceNode.SelectSingleNode("@Index");
-
-                if (lNode == null)
-                    return;
-
+                
                 uint lStreamIndex = 0;
-
-                if (!uint.TryParse(lNode.Value, out lStreamIndex))
-                {
-                    return;
-                }
 
                 lSourceNode = m_VideoSourceMediaTypeComboBox.SelectedItem as XmlNode;
 
@@ -256,9 +241,7 @@ namespace WPFPauseResumeRecording
                 {
                     return;
                 }
-
-
-
+                               
                 object lOutputMediaType;
 
                 if (mSourceControl == null)
@@ -534,12 +517,7 @@ namespace WPFPauseResumeRecording
 
                 if (aSourceNode == null)
                     break;
-
-
-                if (aStreamNode == null)
-                    break;
-
-
+                               
                 if (aMediaTypeNode == null)
                     break;
 
@@ -586,20 +564,7 @@ namespace WPFPauseResumeRecording
 
                 string lSymbolicLink = lNode.Value;
 
-                if (aStreamNode == null)
-                    break;
-
-                lNode = aStreamNode.SelectSingleNode("@Index");
-
-                if (lNode == null)
-                    break;
-
                 uint lStreamIndex = 0;
-
-                if (!uint.TryParse(lNode.Value, out lStreamIndex))
-                {
-                    break;
-                }
 
                 if (aMediaTypeNode == null)
                     break;
@@ -702,12 +667,7 @@ namespace WPFPauseResumeRecording
 
                 if (aSourceNode == null)
                     break;
-
-
-                if (aStreamNode == null)
-                    break;
-
-
+                               
                 if (aMediaTypeNode == null)
                     break;
 
@@ -754,20 +714,7 @@ namespace WPFPauseResumeRecording
 
                 string lSymbolicLink = lNode.Value;
 
-                if (aStreamNode == null)
-                    break;
-
-                lNode = aStreamNode.SelectSingleNode("@Index");
-
-                if (lNode == null)
-                    break;
-
                 uint lStreamIndex = 0;
-
-                if (!uint.TryParse(lNode.Value, out lStreamIndex))
-                {
-                    break;
-                }
 
                 if (aMediaTypeNode == null)
                     break;
@@ -869,12 +816,7 @@ namespace WPFPauseResumeRecording
 
                 if (aSourceNode == null)
                     break;
-
-
-                if (aStreamNode == null)
-                    break;
-
-
+                               
                 if (aMediaTypeNode == null)
                     break;
 
@@ -921,20 +863,7 @@ namespace WPFPauseResumeRecording
 
                 string lSymbolicLink = lNode.Value;
 
-                if (aStreamNode == null)
-                    break;
-
-                lNode = aStreamNode.SelectSingleNode("@Index");
-
-                if (lNode == null)
-                    break;
-
                 uint lStreamIndex = 0;
-
-                if (!uint.TryParse(lNode.Value, out lStreamIndex))
-                {
-                    break;
-                }
 
                 if (aMediaTypeNode == null)
                     break;
@@ -1017,5 +946,13 @@ namespace WPFPauseResumeRecording
             return lresult;
         }
 
+        private void M_VideoSourceMediaTypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var lIndex = m_VideoEncodersComboBox.SelectedIndex;
+
+            m_VideoEncodersComboBox.SelectedIndex = -1;
+
+            m_VideoEncodersComboBox.SelectedIndex = lIndex;
+        }
     }
 }

@@ -79,7 +79,7 @@ namespace WPFIPCameraMJPEGViewer
 
             try
             {
-                lICaptureProcessor = await IPCameraMJPEGCaptureProcessor.createCaptureProcessor();
+                lICaptureProcessor = IPCameraMJPEGCaptureProcessor.createCaptureProcessor();
             }
             catch (System.Exception exc)
             {

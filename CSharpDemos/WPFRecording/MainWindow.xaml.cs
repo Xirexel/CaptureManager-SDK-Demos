@@ -155,22 +155,7 @@ namespace WPFRecording
 
                     string lSymbolicLink = lNode.Value;
 
-                    lSourceNode = mStreamsComboBox.SelectedItem as XmlNode;
-
-                    if (lSourceNode == null)
-                        return;
-
-                    lNode = lSourceNode.SelectSingleNode("@Index");
-
-                    if (lNode == null)
-                        return;
-
                     uint lStreamIndex = 0;
-
-                    if (!uint.TryParse(lNode.Value, out lStreamIndex))
-                    {
-                        return;
-                    }
 
                     lSourceNode = mMediaTypesComboBox.SelectedItem as XmlNode;
 
@@ -391,22 +376,7 @@ namespace WPFRecording
 
             string lSymbolicLink = lNode.Value;
 
-            lSourceNode = mStreamsComboBox.SelectedItem as XmlNode;
-
-            if (lSourceNode == null)
-                return;
-
-            lNode = lSourceNode.SelectSingleNode("@Index");
-
-            if (lNode == null)
-                return;
-
             uint lStreamIndex = 0;
-
-            if (!uint.TryParse(lNode.Value, out lStreamIndex))
-            {
-                return;
-            }
 
             lSourceNode = mMediaTypesComboBox.SelectedItem as XmlNode;
 

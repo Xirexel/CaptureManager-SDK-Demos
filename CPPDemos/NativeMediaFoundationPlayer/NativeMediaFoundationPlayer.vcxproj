@@ -117,6 +117,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -149,10 +150,6 @@
     <ClInclude Include="CMVRMultiSinkFactory.h" />
     <ClInclude Include="CMVRMultiSinkFactoryLoader.h" />
     <ClInclude Include="Common.h" />
-    <ClInclude Include="Common\CaptureManagerTypeInfo.h" />
-    <ClInclude Include="Common\ComPtrCustom.h" />
-    <ClInclude Include="Common\pugiconfig.hpp" />
-    <ClInclude Include="Common\pugixml.hpp" />
     <ClInclude Include="Direct3D9Renderer.h" />
     <ClInclude Include="IRenderer.h" />
     <ClInclude Include="Player.h" />
@@ -160,10 +157,10 @@
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Common\pugixml.cpp" />
     <ClCompile Include="CaptureManagerLoader.cpp" />
     <ClCompile Include="CaptureManagerVideoRendererFactory.cpp" />
     <ClCompile Include="CMVRMultiSinkFactoryLoader.cpp" />
-    <ClCompile Include="Common\pugixml.cpp" />
     <ClCompile Include="Direct3D9Renderer.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RendererFactory.cpp" />

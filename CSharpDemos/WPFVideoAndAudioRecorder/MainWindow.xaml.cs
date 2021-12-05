@@ -212,22 +212,7 @@ namespace WPFVideoAndAudioRecorder
 
                 string lSymbolicLink = lNode.Value;
 
-                lSourceNode = m_VideoStreamComboBox.SelectedItem as XmlNode;
-
-                if (lSourceNode == null)
-                    return;
-
-                lNode = lSourceNode.SelectSingleNode("@Index");
-
-                if (lNode == null)
-                    return;
-
                 uint lStreamIndex = 0;
-
-                if (!uint.TryParse(lNode.Value, out lStreamIndex))
-                {
-                    return;
-                }
 
                 lSourceNode = m_VideoSourceMediaTypeComboBox.SelectedItem as XmlNode;
 
@@ -588,12 +573,7 @@ namespace WPFVideoAndAudioRecorder
 
                 if (aSourceNode == null)
                     break;
-
-
-                if (aStreamNode == null)
-                    break;
-
-
+                               
                 if (aMediaTypeNode == null)
                     break;
 
@@ -639,21 +619,8 @@ namespace WPFVideoAndAudioRecorder
                     break;
 
                 string lSymbolicLink = lNode.Value;
-
-                if (aStreamNode == null)
-                    break;
-
-                lNode = aStreamNode.SelectSingleNode("@Index");
-
-                if (lNode == null)
-                    break;
-
+                
                 uint lStreamIndex = 0;
-
-                if (!uint.TryParse(lNode.Value, out lStreamIndex))
-                {
-                    break;
-                }
                 
                 if (aMediaTypeNode == null)
                     break;
@@ -759,10 +726,6 @@ namespace WPFVideoAndAudioRecorder
                     break;
 
 
-                if (aStreamNode == null)
-                    break;
-
-
                 if (aMediaTypeNode == null)
                     break;
 
@@ -809,20 +772,7 @@ namespace WPFVideoAndAudioRecorder
 
                 string lSymbolicLink = lNode.Value;
 
-                if (aStreamNode == null)
-                    break;
-
-                lNode = aStreamNode.SelectSingleNode("@Index");
-
-                if (lNode == null)
-                    break;
-
                 uint lStreamIndex = 0;
-
-                if (!uint.TryParse(lNode.Value, out lStreamIndex))
-                {
-                    break;
-                }
 
                 if (aMediaTypeNode == null)
                     break;

@@ -14,6 +14,11 @@ class DECLSPEC_UUID("EE8C3745-F45B-42B3-A8CC-C7A696440955")
 class DECLSPEC_UUID("CA37E2BE-BEC0-4B17-946D-44FBC1B3DF55")
 	ConstantBitRateCLSID;
 
+class DECLSPEC_UUID("8F6FF1B6-534E-49C0-B2A8-16D534EAF135")
+	StreamingConstantBitRateCLSID;
+	
+	
+
 //class DECLSPEC_UUID("E80A6BFD-D9C2-4A1F-95DC-14685CACEF3E")
 //	MP4CLSID;
 
@@ -463,7 +468,13 @@ void Recorder::startPreviewAndRecording(
 			g_VideoEncoderNodeFactory,
 			&lVideoCompressedMediaType);
 
-
+		if(lVideoCompressedMediaType == nullptr)
+			createCompresssedMediaType(
+				lVideoSourceMediaType,
+				__uuidof(StreamingConstantBitRateCLSID),
+				g_VideoEncoderNodeFactory,
+				&lVideoCompressedMediaType);	
+					
 		// create output nodes
 
 		std::vector<IUnknown*> lCompressedMediaTypes;
@@ -499,7 +510,18 @@ void Recorder::startPreviewAndRecording(
 			&lVideoEncoderNode);
 
 		if (FAILED(lhresult))
-			break;
+		{
+			lhresult = createEncoderNode(
+				lVideoSourceMediaType,
+				__uuidof(StreamingConstantBitRateCLSID),
+				g_VideoEncoderNodeFactory,
+				lOutputNodes[0],
+				&lVideoEncoderNode);
+
+			if (FAILED(lhresult))
+				break;
+
+		}
 
 
 		// Create splitter for Video Renderer

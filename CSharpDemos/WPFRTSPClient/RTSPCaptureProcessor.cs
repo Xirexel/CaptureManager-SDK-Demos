@@ -13,23 +13,23 @@ using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
 namespace WPFRTSPClient
-{    
+{
     class RTSPCaptureProcessor : ICaptureProcessor
     {
         static Guid MFVideoFormat_H264 = new Guid("34363248-0000-0010-8000-00AA00389B71");
-        
+
         string mPresentationDescriptor = "";
-        
+
         string mURL = "";
 
         MemoryStream m_proxyMemory = new MemoryStream();
 
         // Create a RTSP Client
         RTSPClient m_client = new RTSPClient();
-                
+
         private RTSPCaptureProcessor() { }
 
-        static async public System.Threading.Tasks.Task<ICaptureProcessor> createCaptureProcessor(string a_URL)
+        static public ICaptureProcessor createCaptureProcessor(string a_URL)
         {
 
             string lPresentationDescriptor = "<?xml version='1.0' encoding='UTF-8'?>" +
@@ -41,17 +41,17 @@ namespace WPFRTSPClient
                     "<Attribute Name='MF_DEVSOURCE_ATTRIBUTE_FRIENDLY_NAME' GUID='{60D0E559-52F8-4FA2-BBCE-ACDB34A8EC01}' Title='The display name for a device.' Description='The display name is a human-readable string, suitable for display in a user interface.'>" +
                         "<SingleValue Value='RTSP Capture Processor' />" +
                     "</Attribute>" +
-                "</PresentationDescriptor.Attributes>" + 
-                "<StreamDescriptor Index='0' MajorType='MFMediaType_Video' MajorTypeGUID='{73646976-0000-0010-8000-00AA00389B71}'>" + 
-                    "<MediaTypes TypeCount='1'>" + 
+                "</PresentationDescriptor.Attributes>" +
+                "<StreamDescriptor Index='0' MajorType='MFMediaType_Video' MajorTypeGUID='{73646976-0000-0010-8000-00AA00389B71}'>" +
+                    "<MediaTypes TypeCount='1'>" +
                         "<MediaType Index='0'>" +
-                            "<MediaTypeItem Name='MF_MT_MAJOR_TYPE' GUID='{48EBA18E-F8C9-4687-BF11-0A74C9F96A8F}' Title='Major type GUID for a media type.' Description='The major type defines the overall category of the media data.'>" + 
-                                "<SingleValue Value='MFMediaType_Video' GUID='{73646976-0000-0010-8000-00AA00389B71}' />" + 
+                            "<MediaTypeItem Name='MF_MT_MAJOR_TYPE' GUID='{48EBA18E-F8C9-4687-BF11-0A74C9F96A8F}' Title='Major type GUID for a media type.' Description='The major type defines the overall category of the media data.'>" +
+                                "<SingleValue Value='MFMediaType_Video' GUID='{73646976-0000-0010-8000-00AA00389B71}' />" +
                             "</MediaTypeItem>" +
-                            "<MediaTypeItem Name='CM_DIRECT_CALL' GUID='{DD0570F7-0D02-4897-A55E-F65BFACA1955}' Title='Independent of samples.' Description='Specifies for a media type whether each sample is independent of the other samples in the stream.'>" + 
-                                "<SingleValue Value='True' />" +  
+                            "<MediaTypeItem Name='CM_DIRECT_CALL' GUID='{DD0570F7-0D02-4897-A55E-F65BFACA1955}' Title='Independent of samples.' Description='Specifies for a media type whether each sample is independent of the other samples in the stream.'>" +
+                                "<SingleValue Value='True' />" +
                             "</MediaTypeItem>" +
-                            "<MediaTypeItem Name='MF_MT_SUBTYPE' GUID='{F7E34C9A-42E8-4714-B74B-CB29D72C35E5}' Title='Subtype GUID for a media type.' Description='The subtype GUID defines a specific media format type within a major type.'>" + 
+                            "<MediaTypeItem Name='MF_MT_SUBTYPE' GUID='{F7E34C9A-42E8-4714-B74B-CB29D72C35E5}' Title='Subtype GUID for a media type.' Description='The subtype GUID defines a specific media format type within a major type.'>" +
                                 "<SingleValue GUID='{Temp_SubTypeGUID}' />" +
                             "</MediaTypeItem>" +
                         "</MediaType>" +
@@ -62,7 +62,7 @@ namespace WPFRTSPClient
             RTSPCaptureProcessor lICaptureProcessor = new RTSPCaptureProcessor();
 
             lICaptureProcessor.mURL = a_URL;
-            
+
 
             // The SPS/PPS comes from the SDP data
             // or it is the first SPS/PPS from the H264 video stream
@@ -88,16 +88,16 @@ namespace WPFRTSPClient
                     Marshal.FreeHGlobal(lptrData);
                 }
 
-                Thread.Sleep(500);
+                Thread.Sleep(250);
             };
-                        
+
             // Video NALs. May also include the SPS and PPS in-band for H264
             lICaptureProcessor.m_client.Received_NALs += (List<byte[]> nal_units) =>
             {
                 foreach (byte[] nal_unit in nal_units)
                 {
                     lICaptureProcessor.write(nal_unit);
-                    
+
                     lICaptureProcessor.mLockWrite.WaitOne();
 
                     lICaptureProcessor.mLockWrite.Reset();
@@ -107,7 +107,7 @@ namespace WPFRTSPClient
                 }
             };
 
-            
+
             lPresentationDescriptor = lPresentationDescriptor.Replace("Temp_SubTypeGUID", MFVideoFormat_H264.ToString());
 
             lICaptureProcessor.mPresentationDescriptor = lPresentationDescriptor;
@@ -116,7 +116,7 @@ namespace WPFRTSPClient
         }
 
         AutoResetEvent mLockRead = new AutoResetEvent(false);
-        
+
         public void initilaize(IInitilaizeCaptureSource IInitilaizeCaptureSource)
         {
             if (IInitilaizeCaptureSource != null)

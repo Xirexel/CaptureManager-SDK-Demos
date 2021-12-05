@@ -1,0 +1,167 @@
+﻿<Window x:Class="WPFSourceInfoViewerAsync.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFSourceInfoViewerAsync"
+        Loaded="Window_Loaded"
+        Title="MainWindow" Height="350" Width="800" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <XmlDataProvider x:Key="XmlLogProvider" XPath="Sources/Source" />
+    </Window.Resources>
+    <Grid>
+        <TreeView Grid.Column="0" Grid.Row="0">
+            <TreeView.ItemsSource>
+                <Binding Source="{StaticResource XmlLogProvider}"/>
+            </TreeView.ItemsSource>
+
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate>
+                    <HierarchicalDataTemplate.ItemsSource>
+                        <Binding XPath="child::node()"/>
+                    </HierarchicalDataTemplate.ItemsSource>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock x:Name="mtitleTextblock"/>
+                        <StackPanel x:Name="mValuesPanel" Visibility="Collapsed" Orientation="Horizontal">
+                            <TextBlock Text=": "/>
+                            <TextBlock Margin="5, 0, 0, 0" x:Name="mvalueTextblock"/>
+                            <StackPanel Margin="0, 0, 0, 0" x:Name="mSecondValuesPanel" Visibility="Collapsed" Orientation="Horizontal">
+                                <TextBlock x:Name="msecondtitleTextblock"/>
+                                <TextBlock Text=": "/>
+                                <TextBlock Margin="5, 0, 0, 0" x:Name="msecondvalueTextblock"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                    <HierarchicalDataTemplate.Triggers>
+                        <DataTrigger Binding="{Binding Path=Name}" Value="Source">
+                            <Setter TargetName="mtitleTextblock" Property="Text">
+                                <Setter.Value>
+                                    <Binding XPath="Source.Attributes/Attribute[@Name='MF_DEVSOURCE_ATTRIBUTE_FRIENDLY_NAME']/SingleValue/@Value" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="mtitleTextblock" Property="ToolTip">
+                                <Setter.Value>
+                                    <Binding XPath="Source.Attributes/Attribute[@Name='MF_DEVSOURCE_ATTRIBUTE_FRIENDLY_NAME']/SingleValue/@Description" />
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=Name}" Value="Source.Attributes">
+                            <Setter TargetName="mtitleTextblock" Property="Text" Value="Attributes of source" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=Name}" Value="Attribute">
+                            <Setter TargetName="mtitleTextblock" Property="Text">
+                                <Setter.Value>
+                                    <Binding XPath="@Title" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="mtitleTextblock" Property="ToolTip">
+                                <Setter.Value>
+                                    <Binding XPath="@Description" />
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=Name}" Value="SingleValue">
+                            <Setter TargetName="mtitleTextblock" Property="Text">
+                                <Setter.Value>
+                                    <Binding XPath="@Value" />
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=Name}" Value="Value.ValueParts">
+                            <Setter TargetName="mtitleTextblock" Property="Text" Value="Values"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=Name}" Value="ValuePart">
+                            <Setter TargetName="mtitleTextblock" Property="Text">
+                                <Setter.Value>
+                                    <Binding XPath="@Title" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="mvalueTextblock" Property="Text">
+                                <Setter.Value>
+                                    <Binding XPath="@Value" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="mValuesPanel" Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=Name}" Value="PresentationDescriptor">
+                            <Setter TargetName="mtitleTextblock" Property="Text" Value="Presentation - Stream count"/>
+                            <Setter TargetName="mvalueTextblock" Property="Text">
+                                <Setter.Value>
+                                    <Binding XPath="@StreamCount" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="mValuesPanel" Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=Name}" Value="StreamDescriptor">
+                            <Setter TargetName="mtitleTextblock" Property="Text" Value="Stream - Index"/>
+                            <Setter TargetName="mvalueTextblock" Property="Text">
+                                <Setter.Value>
+                                    <Binding XPath="@Index" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="mValuesPanel" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="mSecondValuesPanel" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="msecondtitleTextblock" Property="Text" Value="; StreamType"/>
+                            <Setter TargetName="msecondvalueTextblock" Property="Text">
+                                <Setter.Value>
+                                    <Binding XPath="@MajorType" />
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=Name}" Value="MediaTypes">
+                            <Setter TargetName="mtitleTextblock" Property="Text" Value="MediaTypes - MediaTypes count"/>
+                            <Setter TargetName="mvalueTextblock" Property="Text">
+                                <Setter.Value>
+                                    <Binding XPath="@TypeCount" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="mValuesPanel" Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=Name}" Value="MediaType">
+                            <Setter TargetName="mtitleTextblock" Property="Text" Value="MediaType - Index"/>
+                            <Setter TargetName="mvalueTextblock" Property="Text">
+                                <Setter.Value>
+                                    <Binding XPath="@Index" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="mValuesPanel" Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=Name}" Value="MediaTypeItem">
+                            <Setter TargetName="mtitleTextblock" Property="Text" >
+                                <Setter.Value>
+                                    <Binding XPath="@Title" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="mtitleTextblock" Property="ToolTip">
+                                <Setter.Value>
+                                    <Binding XPath="@Description" />
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=Name}" Value="RatioValue">
+                            <Setter TargetName="mtitleTextblock" Property="Text" >
+                                <Setter.Value>
+                                    <Binding XPath="@Value" />
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=Name}" Value="PresentationDescriptor.Attributes">
+                            <Setter TargetName="mtitleTextblock" Property="Text">
+                                <Setter.Value>
+                                    <Binding XPath="@Title" />
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=Name}" Value="StreamDescriptor.Attributes">
+                            <Setter TargetName="mtitleTextblock" Property="Text">
+                                <Setter.Value>
+                                    <Binding XPath="@Title" />
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                    </HierarchicalDataTemplate.Triggers>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+    </Grid>
+</Window>

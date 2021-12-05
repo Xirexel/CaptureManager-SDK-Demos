@@ -75,7 +75,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CaptureManagerToCSharpProxy, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\CaptureManager.1.19.0\lib\CaptureManagerToCSharpProxy.dll</HintPath>
+      <HintPath>..\packages\CaptureManager.1.20.0\lib\CaptureManagerToCSharpProxy.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -111,6 +111,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MediaTypeManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

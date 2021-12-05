@@ -132,7 +132,7 @@ public class Main : MonoBehaviour {
 
     private RenderTexture renderTexture;
     
-    private bool isRecording = false;
+    private bool isRecording = true;
 
     private string m_fileName = "Test";
 
@@ -1335,6 +1335,9 @@ public class Main : MonoBehaviour {
             
             lfileFormatIndex = fileFormatDropdown.value - 1;
         }
+
+		Debug.Log (isRecording);
+		Debug.Log (lvideoEncoderIndex);
 
         string lVideoEncoderCLSID = "";
 

@@ -78,7 +78,7 @@ namespace WPFRTSPClient
 
             try
             {
-                lICaptureProcessor = await RTSPCaptureProcessor.createCaptureProcessor(mRTSPSourceComboBox.Text);
+                lICaptureProcessor = RTSPCaptureProcessor.createCaptureProcessor(mRTSPSourceComboBox.Text);
             }
             catch (System.Exception exc)
             {

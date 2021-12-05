@@ -1,6 +1,6 @@
 #include "RendererFactory.h"
 #include "Direct3D9Renderer.h"
-#include "Common\ComPtrCustom.h"
+#include "../Common/ComPtrCustom.h"
 
 
 RendererFactory::RendererFactory()

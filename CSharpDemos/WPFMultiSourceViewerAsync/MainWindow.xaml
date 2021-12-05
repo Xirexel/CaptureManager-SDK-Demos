@@ -1,0 +1,44 @@
+﻿<Window x:Class="WPFMultiSourceViewerAsync.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFMultiSourceViewerAsync"
+	    xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+        Title="MainWindow" Height="500" Width="800"
+        Loaded="Window_Loaded"
+        Closing="Window_Closing" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <XmlDataProvider x:Key="XmlLogProvider" XPath="Sources/Source"/>
+        <XmlDataProvider x:Key="XmlWebCamParametrsProvider" />
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="395*"/>
+                <ColumnDefinition Width="395*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Button Click="mLaunchButton_Click" x:Name="mLaunchButton" Content="Launch" FontSize="28" Grid.Row="0" Grid.Column="0" Margin="127,0,125,5"/>
+
+            <Button Click="mLaunchButton_Click" x:Name="mSecondLaunchButton" Content="Launch" FontSize="28" Grid.Row="0" Grid.Column="1" Margin="122,0,98,5"/>
+
+            <Slider Grid.Row="1" ValueChanged="Slider_ValueChanged" Value="100" Maximum="1" Minimum="0" Grid.Column="0" />
+
+            <Canvas x:Name="mCanvas" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+
+                <WindowsFormsHost Width="{Binding ElementName=mCanvas, Path=ActualWidth}"
+                       Height="{Binding ElementName=mCanvas, Path=ActualHeight}">
+                    <wf:Panel x:Name="mVideoPanel" BackColor="Blue" Height="100" Width="100"/>
+                </WindowsFormsHost>
+            </Canvas>
+        </Grid>
+    </Grid>
+</Window>

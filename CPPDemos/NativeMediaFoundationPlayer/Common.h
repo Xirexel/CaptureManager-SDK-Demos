@@ -13,7 +13,7 @@
 #include <mfidl.h>
 #include <mferror.h>
 #include <evr.h>
-#include "Common\ComPtrCustom.h"
+#include "../Common/ComPtrCustom.h"
 
 template <class T> void SafeRelease(T **ppT)
 {

@@ -29,7 +29,9 @@ namespace WindowsFormsDemo
         IEncoderControl mEncoderControl = null;
 
         AbstractSink mSink = null;
-        
+
+        public XmlNode mSelectedSourceXmlNode = null;
+
         class ContainerItem
         {
             public string mFriendlyName = "SourceItem";
@@ -119,44 +121,52 @@ namespace WindowsFormsDemo
             if (lSelectedSourceItem == null)
                 return;
 
-            var lStreamNodes = lSelectedSourceItem.mXmlNode.SelectNodes("PresentationDescriptor/StreamDescriptor");
+            var lSubTypesNode = lSelectedSourceItem.mXmlNode.SelectNodes("PresentationDescriptor/StreamDescriptor/MediaTypes/MediaType/MediaTypeItem[@Name='MF_MT_SUBTYPE']/SingleValue/@Value");
 
-            if (lStreamNodes == null)
+            if (lSubTypesNode == null)
                 return;
+
+            mSelectedSourceXmlNode = lSelectedSourceItem.mXmlNode;
 
             streamComboBox.Items.Clear();
 
-            foreach (var item in lStreamNodes)
+            foreach (XmlNode item in lSubTypesNode)
             {
-                var lNode = (XmlNode)item;
+                var lSubType = item.Value.Replace("MFVideoFormat_", "");
 
-                if (lNode != null)
-                {
-                    var lvalueNode = lNode.SelectSingleNode("@MajorType");
+                lSubType = lSubType.Replace("MFAudioFormat_", "");
 
-                    ContainerItem lSourceItem = new ContainerItem()
-                    {
-                        mFriendlyName = lvalueNode.Value.Replace("MFMediaType_", ""),
-                        mXmlNode = lNode
-                    };
-
-                    streamComboBox.Items.Add(lSourceItem);
-                }
+                if (!streamComboBox.Items.Contains(lSubType))
+                    streamComboBox.Items.Add(lSubType);
             }
         }
 
         private void streamComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            var lCurrentSubType = (string)streamComboBox.SelectedItem;
 
-            var lSelectedStreamItem = (ContainerItem)streamComboBox.SelectedItem;
+            var lCurrentSourceNode = mSelectedSourceXmlNode as XmlNode;
 
-            if (lSelectedStreamItem == null)
+            if (lCurrentSourceNode == null)
                 return;
 
-            var lMediaTypeNodes = lSelectedStreamItem.mXmlNode.SelectNodes("MediaTypes/MediaType");
+            var lMediaTypeNodes = lCurrentSourceNode.SelectNodes("PresentationDescriptor/StreamDescriptor/MediaTypes/MediaType[MediaTypeItem[@Name='MF_MT_SUBTYPE']/SingleValue[@Value='MFVideoFormat_" + lCurrentSubType + "']]");
 
             if (lMediaTypeNodes == null)
                 return;
+
+            if (lMediaTypeNodes.Count == 0)
+            {
+
+                lMediaTypeNodes = lCurrentSourceNode.SelectNodes("PresentationDescriptor/StreamDescriptor/MediaTypes/MediaType[MediaTypeItem[@Name='MF_MT_SUBTYPE']/SingleValue[@Value='MFAudioFormat_" + lCurrentSubType + "']]");
+
+                if (lMediaTypeNodes == null)
+                    return;
+
+                if (lMediaTypeNodes.Count == 0)
+                    return;
+
+            }
 
             mediaTypeComboBox.Items.Clear();
 
@@ -166,7 +176,13 @@ namespace WindowsFormsDemo
 
                 if (lNode != null)
                 {
-                    var lvalueNode = lSelectedStreamItem.mXmlNode.SelectSingleNode("@MajorType");
+
+                    var lStreamNode = lCurrentSourceNode.SelectSingleNode("PresentationDescriptor/StreamDescriptor");
+
+                    if (lStreamNode == null)
+                        return;
+
+                    var lvalueNode = lStreamNode.SelectSingleNode("@MajorType");
 
                     string mTitle = "";
                    
@@ -226,14 +242,24 @@ namespace WindowsFormsDemo
 
         private void mediaTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            var lCurrentSubType = (string)streamComboBox.SelectedItem;
 
+            var lCurrentSourceNode = mSelectedSourceXmlNode as XmlNode;
 
-            var lSelectedStreamItem = (ContainerItem)streamComboBox.SelectedItem;
-
-            if (lSelectedStreamItem == null)
+            if (lCurrentSourceNode == null)
                 return;
 
-            var lValueNode = lSelectedStreamItem.mXmlNode.SelectSingleNode("@MajorTypeGUID");
+            var lMediaTypesNode = lCurrentSourceNode.SelectNodes("PresentationDescriptor/StreamDescriptor/MediaTypes/MediaType[MediaTypeItem[@Name='MF_MT_SUBTYPE']/SingleValue[@Value='MFVideoFormat_" + lCurrentSubType + "']]");
+
+            if (lMediaTypesNode == null)
+                return;
+
+            var lStreamNode = lCurrentSourceNode.SelectSingleNode("PresentationDescriptor/StreamDescriptor");
+
+            if (lStreamNode == null)
+                return;
+
+            var lValueNode = lStreamNode.SelectSingleNode("@MajorTypeGUID");
                        
             string lXPath = "EncoderFactories/Group[@GUID='blank']/EncoderFactory";
 
@@ -329,27 +355,8 @@ namespace WindowsFormsDemo
 
                 string lSymbolicLink = lNode.Value;
 
-                var lSelectedStreamItem = (ContainerItem)streamComboBox.SelectedItem;
-
-                if (lSelectedStreamItem == null)
-                    return;
-
-                lSourceNode = lSelectedStreamItem.mXmlNode;
-
-                if (lSourceNode == null)
-                    return;
-
-                lNode = lSourceNode.SelectSingleNode("@Index");
-
-                if (lNode == null)
-                    return;
 
                 uint lStreamIndex = 0;
-
-                if (!uint.TryParse(lNode.Value, out lStreamIndex))
-                {
-                    return;
-                }
 
                 var lSelectedMediaTypeItem = (ContainerItem)mediaTypeComboBox.SelectedItem;
 
@@ -433,11 +440,16 @@ namespace WindowsFormsDemo
 
         private void encoderModeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var lSelectedStreamItem = (ContainerItem)streamComboBox.SelectedItem;
+            var lCurrentSourceNode = mSelectedSourceXmlNode as XmlNode;
 
-            if (lSelectedStreamItem == null)
+            if (lCurrentSourceNode == null)
                 return;
 
+            var lStreamNode = lCurrentSourceNode.SelectSingleNode("PresentationDescriptor/StreamDescriptor");
+
+            if (lStreamNode == null)
+                return;
+            
             var lSelectedEncoderModeItem = (ContainerItem)encoderModeComboBox.SelectedItem;
 
             if (lSelectedEncoderModeItem == null)
@@ -455,7 +467,7 @@ namespace WindowsFormsDemo
                 if (lNode != null)
                 {
 
-                    var lvalueNode = lSelectedStreamItem.mXmlNode.SelectSingleNode("@MajorType");
+                    var lvalueNode = lStreamNode.SelectSingleNode("@MajorType");
 
                     string mTitle = "";
 
@@ -688,28 +700,8 @@ namespace WindowsFormsDemo
                 return;
 
             string lSymbolicLink = lNode.Value;
-
-            var lSelectedStreamItem = (ContainerItem)streamComboBox.SelectedItem;
-
-            if (lSelectedStreamItem == null)
-                return;
-
-            lSourceNode = lSelectedStreamItem.mXmlNode;
-
-            if (lSourceNode == null)
-                return;
-
-            lNode = lSourceNode.SelectSingleNode("@Index");
-
-            if (lNode == null)
-                return;
-
+            
             uint lStreamIndex = 0;
-
-            if (!uint.TryParse(lNode.Value, out lStreamIndex))
-            {
-                return;
-            }
 
             var lSelectedMediaTypeItem = (ContainerItem)mediaTypeComboBox.SelectedItem;
 

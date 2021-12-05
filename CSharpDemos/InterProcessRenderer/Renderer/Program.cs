@@ -57,7 +57,7 @@ namespace InterProcessRenderer
             {
                 if (_Timer == null)
                 {
-                    _Timer = new System.Timers.Timer(2000);
+                    _Timer = new System.Timers.Timer(4000);
                     _Timer.Elapsed += _Timer_Elapsed;
                 }
 

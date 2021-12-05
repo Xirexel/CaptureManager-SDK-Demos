@@ -33,8 +33,8 @@ namespace WPFIPCameraMJPEGMultiSourceViewer
 
         string[] URLs = {
                             //"http://144.139.80.151:8080/mjpg/video.mjpg", 
-                            "http://mx.cafesydney.com:8888/mjpg/video.mjpg", 
-                            "http://144.139.80.151:8080/mjpg/video.mjpg"
+                            "http://mx.cafesydney.com:8888/mjpg/video.mjpg",
+                            "http://mx.cafesydney.com:8888/mjpg/video.mjpg"
                         };
 
         uint mStreams = 1;

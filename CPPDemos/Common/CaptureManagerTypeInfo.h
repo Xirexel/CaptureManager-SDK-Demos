@@ -4,11 +4,11 @@
 
 
  /* File created by MIDL compiler version 8.00.0603 */
-/* at Sat Jan 07 21:20:47 2017
+/* at Wed Jan 27 10:49:03 2021
  */
 /* Compiler settings for CaptureManagerTypeInfo.idl:
-    Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 8.00.0603 
-    protocol : dce , ms_ext, c_ext, robust
+    Oicf, W1, Zp8, env=Win64 (32b run), target_arch=AMD64 8.00.0603 
+    protocol : all , ms_ext, c_ext, robust
     error checks: allocation ref bounds_check enum stub_data 
     VC __declspec() decoration level: 
          __declspec(uuid()), __declspec(selectany), __declspec(novtable)
@@ -21,7 +21,7 @@
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 475
+#define __REQUIRED_RPCNDR_H_VERSION__ 500
 #endif
 
 #include "rpc.h"
@@ -108,6 +108,13 @@ typedef interface IEVRSinkFactory IEVRSinkFactory;
 #endif 	/* __IEVRSinkFactory_FWD_DEFINED__ */
 
 
+#ifndef __IEVRMultiSinkFactory_FWD_DEFINED__
+#define __IEVRMultiSinkFactory_FWD_DEFINED__
+typedef interface IEVRMultiSinkFactory IEVRMultiSinkFactory;
+
+#endif 	/* __IEVRMultiSinkFactory_FWD_DEFINED__ */
+
+
 #ifndef __IMediaTypeParser_FWD_DEFINED__
 #define __IMediaTypeParser_FWD_DEFINED__
 typedef interface IMediaTypeParser IMediaTypeParser;
@@ -134,6 +141,20 @@ typedef interface IStreamControl IStreamControl;
 typedef interface ISpreaderNodeFactory ISpreaderNodeFactory;
 
 #endif 	/* __ISpreaderNodeFactory_FWD_DEFINED__ */
+
+
+#ifndef __ISwitcherNodeFactory_FWD_DEFINED__
+#define __ISwitcherNodeFactory_FWD_DEFINED__
+typedef interface ISwitcherNodeFactory ISwitcherNodeFactory;
+
+#endif 	/* __ISwitcherNodeFactory_FWD_DEFINED__ */
+
+
+#ifndef __IMixerNodeFactory_FWD_DEFINED__
+#define __IMixerNodeFactory_FWD_DEFINED__
+typedef interface IMixerNodeFactory IMixerNodeFactory;
+
+#endif 	/* __IMixerNodeFactory_FWD_DEFINED__ */
 
 
 #ifndef __IEncoderControl_FWD_DEFINED__
@@ -197,6 +218,83 @@ typedef interface ICaptureManagerControl ICaptureManagerControl;
 typedef interface IVersionControl IVersionControl;
 
 #endif 	/* __IVersionControl_FWD_DEFINED__ */
+
+
+#ifndef __IEVRStreamControl_FWD_DEFINED__
+#define __IEVRStreamControl_FWD_DEFINED__
+typedef interface IEVRStreamControl IEVRStreamControl;
+
+#endif 	/* __IEVRStreamControl_FWD_DEFINED__ */
+
+
+#ifndef __IInitilaizeCaptureSource_FWD_DEFINED__
+#define __IInitilaizeCaptureSource_FWD_DEFINED__
+typedef interface IInitilaizeCaptureSource IInitilaizeCaptureSource;
+
+#endif 	/* __IInitilaizeCaptureSource_FWD_DEFINED__ */
+
+
+#ifndef __ICurrentMediaType_FWD_DEFINED__
+#define __ICurrentMediaType_FWD_DEFINED__
+typedef interface ICurrentMediaType ICurrentMediaType;
+
+#endif 	/* __ICurrentMediaType_FWD_DEFINED__ */
+
+
+#ifndef __ISourceRequestResult_FWD_DEFINED__
+#define __ISourceRequestResult_FWD_DEFINED__
+typedef interface ISourceRequestResult ISourceRequestResult;
+
+#endif 	/* __ISourceRequestResult_FWD_DEFINED__ */
+
+
+#ifndef __ICaptureProcessor_FWD_DEFINED__
+#define __ICaptureProcessor_FWD_DEFINED__
+typedef interface ICaptureProcessor ICaptureProcessor;
+
+#endif 	/* __ICaptureProcessor_FWD_DEFINED__ */
+
+
+#ifndef __IRenderingControl_FWD_DEFINED__
+#define __IRenderingControl_FWD_DEFINED__
+typedef interface IRenderingControl IRenderingControl;
+
+#endif 	/* __IRenderingControl_FWD_DEFINED__ */
+
+
+#ifndef __ISwitcherControl_FWD_DEFINED__
+#define __ISwitcherControl_FWD_DEFINED__
+typedef interface ISwitcherControl ISwitcherControl;
+
+#endif 	/* __ISwitcherControl_FWD_DEFINED__ */
+
+
+#ifndef __IVideoMixerControl_FWD_DEFINED__
+#define __IVideoMixerControl_FWD_DEFINED__
+typedef interface IVideoMixerControl IVideoMixerControl;
+
+#endif 	/* __IVideoMixerControl_FWD_DEFINED__ */
+
+
+#ifndef __IAudioMixerControl_FWD_DEFINED__
+#define __IAudioMixerControl_FWD_DEFINED__
+typedef interface IAudioMixerControl IAudioMixerControl;
+
+#endif 	/* __IAudioMixerControl_FWD_DEFINED__ */
+
+
+#ifndef __ISARSinkFactory_FWD_DEFINED__
+#define __ISARSinkFactory_FWD_DEFINED__
+typedef interface ISARSinkFactory ISARSinkFactory;
+
+#endif 	/* __ISARSinkFactory_FWD_DEFINED__ */
+
+
+#ifndef __ISARVolumeControl_FWD_DEFINED__
+#define __ISARVolumeControl_FWD_DEFINED__
+typedef interface ISARVolumeControl ISARVolumeControl;
+
+#endif 	/* __ISARVolumeControl_FWD_DEFINED__ */
 
 
 #ifndef __CoLogPrintOut_FWD_DEFINED__
@@ -328,6 +426,13 @@ typedef interface ISpreaderNodeFactory ISpreaderNodeFactory;
 #endif 	/* __ISpreaderNodeFactory_FWD_DEFINED__ */
 
 
+#ifndef __ISwitcherNodeFactory_FWD_DEFINED__
+#define __ISwitcherNodeFactory_FWD_DEFINED__
+typedef interface ISwitcherNodeFactory ISwitcherNodeFactory;
+
+#endif 	/* __ISwitcherNodeFactory_FWD_DEFINED__ */
+
+
 #ifndef __IEncoderControl_FWD_DEFINED__
 #define __IEncoderControl_FWD_DEFINED__
 typedef interface IEncoderControl IEncoderControl;
@@ -361,6 +466,97 @@ typedef interface IByteStreamSinkFactory IByteStreamSinkFactory;
 typedef interface IVersionControl IVersionControl;
 
 #endif 	/* __IVersionControl_FWD_DEFINED__ */
+
+
+#ifndef __IEVRStreamControl_FWD_DEFINED__
+#define __IEVRStreamControl_FWD_DEFINED__
+typedef interface IEVRStreamControl IEVRStreamControl;
+
+#endif 	/* __IEVRStreamControl_FWD_DEFINED__ */
+
+
+#ifndef __IEVRMultiSinkFactory_FWD_DEFINED__
+#define __IEVRMultiSinkFactory_FWD_DEFINED__
+typedef interface IEVRMultiSinkFactory IEVRMultiSinkFactory;
+
+#endif 	/* __IEVRMultiSinkFactory_FWD_DEFINED__ */
+
+
+#ifndef __ICaptureProcessor_FWD_DEFINED__
+#define __ICaptureProcessor_FWD_DEFINED__
+typedef interface ICaptureProcessor ICaptureProcessor;
+
+#endif 	/* __ICaptureProcessor_FWD_DEFINED__ */
+
+
+#ifndef __IInitilaizeCaptureSource_FWD_DEFINED__
+#define __IInitilaizeCaptureSource_FWD_DEFINED__
+typedef interface IInitilaizeCaptureSource IInitilaizeCaptureSource;
+
+#endif 	/* __IInitilaizeCaptureSource_FWD_DEFINED__ */
+
+
+#ifndef __ISourceRequestResult_FWD_DEFINED__
+#define __ISourceRequestResult_FWD_DEFINED__
+typedef interface ISourceRequestResult ISourceRequestResult;
+
+#endif 	/* __ISourceRequestResult_FWD_DEFINED__ */
+
+
+#ifndef __ICurrentMediaType_FWD_DEFINED__
+#define __ICurrentMediaType_FWD_DEFINED__
+typedef interface ICurrentMediaType ICurrentMediaType;
+
+#endif 	/* __ICurrentMediaType_FWD_DEFINED__ */
+
+
+#ifndef __IRenderingControl_FWD_DEFINED__
+#define __IRenderingControl_FWD_DEFINED__
+typedef interface IRenderingControl IRenderingControl;
+
+#endif 	/* __IRenderingControl_FWD_DEFINED__ */
+
+
+#ifndef __ISwitcherControl_FWD_DEFINED__
+#define __ISwitcherControl_FWD_DEFINED__
+typedef interface ISwitcherControl ISwitcherControl;
+
+#endif 	/* __ISwitcherControl_FWD_DEFINED__ */
+
+
+#ifndef __IMixerNodeFactory_FWD_DEFINED__
+#define __IMixerNodeFactory_FWD_DEFINED__
+typedef interface IMixerNodeFactory IMixerNodeFactory;
+
+#endif 	/* __IMixerNodeFactory_FWD_DEFINED__ */
+
+
+#ifndef __IVideoMixerControl_FWD_DEFINED__
+#define __IVideoMixerControl_FWD_DEFINED__
+typedef interface IVideoMixerControl IVideoMixerControl;
+
+#endif 	/* __IVideoMixerControl_FWD_DEFINED__ */
+
+
+#ifndef __IAudioMixerControl_FWD_DEFINED__
+#define __IAudioMixerControl_FWD_DEFINED__
+typedef interface IAudioMixerControl IAudioMixerControl;
+
+#endif 	/* __IAudioMixerControl_FWD_DEFINED__ */
+
+
+#ifndef __ISARSinkFactory_FWD_DEFINED__
+#define __ISARSinkFactory_FWD_DEFINED__
+typedef interface ISARSinkFactory ISARSinkFactory;
+
+#endif 	/* __ISARSinkFactory_FWD_DEFINED__ */
+
+
+#ifndef __ISARVolumeControl_FWD_DEFINED__
+#define __ISARVolumeControl_FWD_DEFINED__
+typedef interface ISARVolumeControl ISARVolumeControl;
+
+#endif 	/* __ISARVolumeControl_FWD_DEFINED__ */
 
 
 /* header files for imported files */
@@ -1714,6 +1910,142 @@ EXTERN_C const IID IID_IEVRSinkFactory;
 #endif 	/* __IEVRSinkFactory_INTERFACE_DEFINED__ */
 
 
+#ifndef __IEVRMultiSinkFactory_INTERFACE_DEFINED__
+#define __IEVRMultiSinkFactory_INTERFACE_DEFINED__
+
+/* interface IEVRMultiSinkFactory */
+/* [dual][helpstring][local][oleautomation][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IEVRMultiSinkFactory;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("10E52132-A73F-4A9E-A91B-FE18C91D6837")
+    IEVRMultiSinkFactory : public IDispatch
+    {
+    public:
+        virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE createOutputNodes( 
+            /* [in] */ LPVOID aHandle,
+            /* [in] */ IUnknown *aPtrUnkTarget,
+            /* [in] */ DWORD aOutputNodeAmount,
+            /* [out] */ VARIANT *aPtrArrayPtrTopologyOutputNodes) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IEVRMultiSinkFactoryVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IEVRMultiSinkFactory * This,
+            /* [in] */ REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IEVRMultiSinkFactory * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IEVRMultiSinkFactory * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IEVRMultiSinkFactory * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IEVRMultiSinkFactory * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IEVRMultiSinkFactory * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IEVRMultiSinkFactory * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *createOutputNodes )( 
+            IEVRMultiSinkFactory * This,
+            /* [in] */ LPVOID aHandle,
+            /* [in] */ IUnknown *aPtrUnkTarget,
+            /* [in] */ DWORD aOutputNodeAmount,
+            /* [out] */ VARIANT *aPtrArrayPtrTopologyOutputNodes);
+        
+        END_INTERFACE
+    } IEVRMultiSinkFactoryVtbl;
+
+    interface IEVRMultiSinkFactory
+    {
+        CONST_VTBL struct IEVRMultiSinkFactoryVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IEVRMultiSinkFactory_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IEVRMultiSinkFactory_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IEVRMultiSinkFactory_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IEVRMultiSinkFactory_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define IEVRMultiSinkFactory_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define IEVRMultiSinkFactory_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define IEVRMultiSinkFactory_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define IEVRMultiSinkFactory_createOutputNodes(This,aHandle,aPtrUnkTarget,aOutputNodeAmount,aPtrArrayPtrTopologyOutputNodes)	\
+    ( (This)->lpVtbl -> createOutputNodes(This,aHandle,aPtrUnkTarget,aOutputNodeAmount,aPtrArrayPtrTopologyOutputNodes) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IEVRMultiSinkFactory_INTERFACE_DEFINED__ */
+
+
 #ifndef __IMediaTypeParser_INTERFACE_DEFINED__
 #define __IMediaTypeParser_INTERFACE_DEFINED__
 
@@ -2252,6 +2584,272 @@ EXTERN_C const IID IID_ISpreaderNodeFactory;
 
 
 #endif 	/* __ISpreaderNodeFactory_INTERFACE_DEFINED__ */
+
+
+#ifndef __ISwitcherNodeFactory_INTERFACE_DEFINED__
+#define __ISwitcherNodeFactory_INTERFACE_DEFINED__
+
+/* interface ISwitcherNodeFactory */
+/* [dual][helpstring][oleautomation][uuid][object] */ 
+
+
+EXTERN_C const IID IID_ISwitcherNodeFactory;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("B8187D19-EBFD-4F8D-80D9-A15EBA3B369C")
+    ISwitcherNodeFactory : public IDispatch
+    {
+    public:
+        virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE createSwitcherNode( 
+            /* [in] */ IUnknown *aPtrDownStreamTopologyNode,
+            /* [out] */ IUnknown **aPtrPtrTopologySwitcherNode) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct ISwitcherNodeFactoryVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ISwitcherNodeFactory * This,
+            /* [in] */ REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ISwitcherNodeFactory * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ISwitcherNodeFactory * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            ISwitcherNodeFactory * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            ISwitcherNodeFactory * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            ISwitcherNodeFactory * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            ISwitcherNodeFactory * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *createSwitcherNode )( 
+            ISwitcherNodeFactory * This,
+            /* [in] */ IUnknown *aPtrDownStreamTopologyNode,
+            /* [out] */ IUnknown **aPtrPtrTopologySwitcherNode);
+        
+        END_INTERFACE
+    } ISwitcherNodeFactoryVtbl;
+
+    interface ISwitcherNodeFactory
+    {
+        CONST_VTBL struct ISwitcherNodeFactoryVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ISwitcherNodeFactory_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ISwitcherNodeFactory_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ISwitcherNodeFactory_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define ISwitcherNodeFactory_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define ISwitcherNodeFactory_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define ISwitcherNodeFactory_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define ISwitcherNodeFactory_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define ISwitcherNodeFactory_createSwitcherNode(This,aPtrDownStreamTopologyNode,aPtrPtrTopologySwitcherNode)	\
+    ( (This)->lpVtbl -> createSwitcherNode(This,aPtrDownStreamTopologyNode,aPtrPtrTopologySwitcherNode) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ISwitcherNodeFactory_INTERFACE_DEFINED__ */
+
+
+#ifndef __IMixerNodeFactory_INTERFACE_DEFINED__
+#define __IMixerNodeFactory_INTERFACE_DEFINED__
+
+/* interface IMixerNodeFactory */
+/* [dual][helpstring][oleautomation][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IMixerNodeFactory;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("A213FD96-223C-479B-9EF4-F2864F5D001D")
+    IMixerNodeFactory : public IDispatch
+    {
+    public:
+        virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE createMixerNodes( 
+            /* [in] */ IUnknown *aPtrDownStreamTopologyNode,
+            /* [in] */ DWORD aInputNodeAmount,
+            /* [out] */ VARIANT *aPtrArrayPtrTopologyInputNodes) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IMixerNodeFactoryVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IMixerNodeFactory * This,
+            /* [in] */ REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IMixerNodeFactory * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IMixerNodeFactory * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IMixerNodeFactory * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IMixerNodeFactory * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IMixerNodeFactory * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IMixerNodeFactory * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *createMixerNodes )( 
+            IMixerNodeFactory * This,
+            /* [in] */ IUnknown *aPtrDownStreamTopologyNode,
+            /* [in] */ DWORD aInputNodeAmount,
+            /* [out] */ VARIANT *aPtrArrayPtrTopologyInputNodes);
+        
+        END_INTERFACE
+    } IMixerNodeFactoryVtbl;
+
+    interface IMixerNodeFactory
+    {
+        CONST_VTBL struct IMixerNodeFactoryVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IMixerNodeFactory_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IMixerNodeFactory_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IMixerNodeFactory_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IMixerNodeFactory_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define IMixerNodeFactory_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define IMixerNodeFactory_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define IMixerNodeFactory_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define IMixerNodeFactory_createMixerNodes(This,aPtrDownStreamTopologyNode,aInputNodeAmount,aPtrArrayPtrTopologyInputNodes)	\
+    ( (This)->lpVtbl -> createMixerNodes(This,aPtrDownStreamTopologyNode,aInputNodeAmount,aPtrArrayPtrTopologyInputNodes) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IMixerNodeFactory_INTERFACE_DEFINED__ */
 
 
 #ifndef __IEncoderControl_INTERFACE_DEFINED__
@@ -3520,12 +4118,1656 @@ EXTERN_C const IID IID_IVersionControl;
 #endif 	/* __IVersionControl_INTERFACE_DEFINED__ */
 
 
+#ifndef __IEVRStreamControl_INTERFACE_DEFINED__
+#define __IEVRStreamControl_INTERFACE_DEFINED__
+
+/* interface IEVRStreamControl */
+/* [dual][helpstring][oleautomation][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IEVRStreamControl;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("47F9883C-77B1-4A0B-9233-B3EAFA8F387E")
+    IEVRStreamControl : public IDispatch
+    {
+    public:
+        virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE setPosition( 
+            /* [in] */ IUnknown *aPtrEVROutputNode,
+            /* [in] */ FLOAT aLeft,
+            /* [in] */ FLOAT aRight,
+            /* [in] */ FLOAT aTop,
+            /* [in] */ FLOAT aBottom) = 0;
+        
+        virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE setZOrder( 
+            /* [in] */ IUnknown *aPtrEVROutputNode,
+            /* [in] */ DWORD aZOrder) = 0;
+        
+        virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE getPosition( 
+            /* [in] */ IUnknown *aPtrEVROutputNode,
+            /* [out] */ FLOAT *aPtrLeft,
+            /* [out] */ FLOAT *aPtrRight,
+            /* [out] */ FLOAT *aPtrTop,
+            /* [out] */ FLOAT *aPtrBottom) = 0;
+        
+        virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE getZOrder( 
+            /* [in] */ IUnknown *aPtrEVROutputNode,
+            /* [out] */ DWORD *aPtrZOrder) = 0;
+        
+        virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE flush( 
+            /* [in] */ IUnknown *aPtrEVROutputNode) = 0;
+        
+        virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE setSrcPosition( 
+            /* [in] */ IUnknown *aPtrEVROutputNode,
+            /* [in] */ FLOAT aLeft,
+            /* [in] */ FLOAT aRight,
+            /* [in] */ FLOAT aTop,
+            /* [in] */ FLOAT aBottom) = 0;
+        
+        virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE getSrcPosition( 
+            /* [in] */ IUnknown *aPtrEVROutputNode,
+            /* [out] */ FLOAT *aPtrLeft,
+            /* [out] */ FLOAT *aPtrRight,
+            /* [out] */ FLOAT *aPtrTop,
+            /* [out] */ FLOAT *aPtrBottom) = 0;
+        
+        virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE getCollectionOfFilters( 
+            /* [in] */ IUnknown *aPtrEVROutputNode,
+            /* [out] */ BSTR *aPtrPtrXMLstring) = 0;
+        
+        virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE setFilterParametr( 
+            /* [in] */ IUnknown *aPtrEVROutputNode,
+            /* [in] */ DWORD aParametrIndex,
+            /* [in] */ LONG aNewValue,
+            /* [in] */ BOOL aIsEnabled) = 0;
+        
+        virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE getCollectionOfOutputFeatures( 
+            /* [in] */ IUnknown *aPtrEVROutputNode,
+            /* [out] */ BSTR *aPtrPtrXMLstring) = 0;
+        
+        virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE setOutputFeatureParametr( 
+            /* [in] */ IUnknown *aPtrEVROutputNode,
+            /* [in] */ DWORD aParametrIndex,
+            /* [in] */ LONG aNewValue) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IEVRStreamControlVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IEVRStreamControl * This,
+            /* [in] */ REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IEVRStreamControl * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IEVRStreamControl * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IEVRStreamControl * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IEVRStreamControl * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IEVRStreamControl * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IEVRStreamControl * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *setPosition )( 
+            IEVRStreamControl * This,
+            /* [in] */ IUnknown *aPtrEVROutputNode,
+            /* [in] */ FLOAT aLeft,
+            /* [in] */ FLOAT aRight,
+            /* [in] */ FLOAT aTop,
+            /* [in] */ FLOAT aBottom);
+        
+        /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *setZOrder )( 
+            IEVRStreamControl * This,
+            /* [in] */ IUnknown *aPtrEVROutputNode,
+            /* [in] */ DWORD aZOrder);
+        
+        /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *getPosition )( 
+            IEVRStreamControl * This,
+            /* [in] */ IUnknown *aPtrEVROutputNode,
+            /* [out] */ FLOAT *aPtrLeft,
+            /* [out] */ FLOAT *aPtrRight,
+            /* [out] */ FLOAT *aPtrTop,
+            /* [out] */ FLOAT *aPtrBottom);
+        
+        /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *getZOrder )( 
+            IEVRStreamControl * This,
+            /* [in] */ IUnknown *aPtrEVROutputNode,
+            /* [out] */ DWORD *aPtrZOrder);
+        
+        /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *flush )( 
+            IEVRStreamControl * This,
+            /* [in] */ IUnknown *aPtrEVROutputNode);
+        
+        /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *setSrcPosition )( 
+            IEVRStreamControl * This,
+            /* [in] */ IUnknown *aPtrEVROutputNode,
+            /* [in] */ FLOAT aLeft,
+            /* [in] */ FLOAT aRight,
+            /* [in] */ FLOAT aTop,
+            /* [in] */ FLOAT aBottom);
+        
+        /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *getSrcPosition )( 
+            IEVRStreamControl * This,
+            /* [in] */ IUnknown *aPtrEVROutputNode,
+            /* [out] */ FLOAT *aPtrLeft,
+            /* [out] */ FLOAT *aPtrRight,
+            /* [out] */ FLOAT *aPtrTop,
+            /* [out] */ FLOAT *aPtrBottom);
+        
+        /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *getCollectionOfFilters )( 
+            IEVRStreamControl * This,
+            /* [in] */ IUnknown *aPtrEVROutputNode,
+            /* [out] */ BSTR *aPtrPtrXMLstring);
+        
+        /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *setFilterParametr )( 
+            IEVRStreamControl * This,
+            /* [in] */ IUnknown *aPtrEVROutputNode,
+            /* [in] */ DWORD aParametrIndex,
+            /* [in] */ LONG aNewValue,
+            /* [in] */ BOOL aIsEnabled);
+        
+        /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *getCollectionOfOutputFeatures )( 
+            IEVRStreamControl * This,
+            /* [in] */ IUnknown *aPtrEVROutputNode,
+            /* [out] */ BSTR *aPtrPtrXMLstring);
+        
+        /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *setOutputFeatureParametr )( 
+            IEVRStreamControl * This,
+            /* [in] */ IUnknown *aPtrEVROutputNode,
+            /* [in] */ DWORD aParametrIndex,
+            /* [in] */ LONG aNewValue);
+        
+        END_INTERFACE
+    } IEVRStreamControlVtbl;
+
+    interface IEVRStreamControl
+    {
+        CONST_VTBL struct IEVRStreamControlVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IEVRStreamControl_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IEVRStreamControl_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IEVRStreamControl_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IEVRStreamControl_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define IEVRStreamControl_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define IEVRStreamControl_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define IEVRStreamControl_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define IEVRStreamControl_setPosition(This,aPtrEVROutputNode,aLeft,aRight,aTop,aBottom)	\
+    ( (This)->lpVtbl -> setPosition(This,aPtrEVROutputNode,aLeft,aRight,aTop,aBottom) ) 
+
+#define IEVRStreamControl_setZOrder(This,aPtrEVROutputNode,aZOrder)	\
+    ( (This)->lpVtbl -> setZOrder(This,aPtrEVROutputNode,aZOrder) ) 
+
+#define IEVRStreamControl_getPosition(This,aPtrEVROutputNode,aPtrLeft,aPtrRight,aPtrTop,aPtrBottom)	\
+    ( (This)->lpVtbl -> getPosition(This,aPtrEVROutputNode,aPtrLeft,aPtrRight,aPtrTop,aPtrBottom) ) 
+
+#define IEVRStreamControl_getZOrder(This,aPtrEVROutputNode,aPtrZOrder)	\
+    ( (This)->lpVtbl -> getZOrder(This,aPtrEVROutputNode,aPtrZOrder) ) 
+
+#define IEVRStreamControl_flush(This,aPtrEVROutputNode)	\
+    ( (This)->lpVtbl -> flush(This,aPtrEVROutputNode) ) 
+
+#define IEVRStreamControl_setSrcPosition(This,aPtrEVROutputNode,aLeft,aRight,aTop,aBottom)	\
+    ( (This)->lpVtbl -> setSrcPosition(This,aPtrEVROutputNode,aLeft,aRight,aTop,aBottom) ) 
+
+#define IEVRStreamControl_getSrcPosition(This,aPtrEVROutputNode,aPtrLeft,aPtrRight,aPtrTop,aPtrBottom)	\
+    ( (This)->lpVtbl -> getSrcPosition(This,aPtrEVROutputNode,aPtrLeft,aPtrRight,aPtrTop,aPtrBottom) ) 
+
+#define IEVRStreamControl_getCollectionOfFilters(This,aPtrEVROutputNode,aPtrPtrXMLstring)	\
+    ( (This)->lpVtbl -> getCollectionOfFilters(This,aPtrEVROutputNode,aPtrPtrXMLstring) ) 
+
+#define IEVRStreamControl_setFilterParametr(This,aPtrEVROutputNode,aParametrIndex,aNewValue,aIsEnabled)	\
+    ( (This)->lpVtbl -> setFilterParametr(This,aPtrEVROutputNode,aParametrIndex,aNewValue,aIsEnabled) ) 
+
+#define IEVRStreamControl_getCollectionOfOutputFeatures(This,aPtrEVROutputNode,aPtrPtrXMLstring)	\
+    ( (This)->lpVtbl -> getCollectionOfOutputFeatures(This,aPtrEVROutputNode,aPtrPtrXMLstring) ) 
+
+#define IEVRStreamControl_setOutputFeatureParametr(This,aPtrEVROutputNode,aParametrIndex,aNewValue)	\
+    ( (This)->lpVtbl -> setOutputFeatureParametr(This,aPtrEVROutputNode,aParametrIndex,aNewValue) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IEVRStreamControl_INTERFACE_DEFINED__ */
+
+
+#ifndef __IInitilaizeCaptureSource_INTERFACE_DEFINED__
+#define __IInitilaizeCaptureSource_INTERFACE_DEFINED__
+
+/* interface IInitilaizeCaptureSource */
+/* [helpstring][oleautomation][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IInitilaizeCaptureSource;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("23B3BCE7-3003-48E6-9FA3-9F5F8439F3DC")
+    IInitilaizeCaptureSource : public IUnknown
+    {
+    public:
+        virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE setPresentationDescriptor( 
+            /* [in] */ BSTR aXMLPresentationDescriptor) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IInitilaizeCaptureSourceVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IInitilaizeCaptureSource * This,
+            /* [in] */ REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IInitilaizeCaptureSource * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IInitilaizeCaptureSource * This);
+        
+        /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *setPresentationDescriptor )( 
+            IInitilaizeCaptureSource * This,
+            /* [in] */ BSTR aXMLPresentationDescriptor);
+        
+        END_INTERFACE
+    } IInitilaizeCaptureSourceVtbl;
+
+    interface IInitilaizeCaptureSource
+    {
+        CONST_VTBL struct IInitilaizeCaptureSourceVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IInitilaizeCaptureSource_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IInitilaizeCaptureSource_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IInitilaizeCaptureSource_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IInitilaizeCaptureSource_setPresentationDescriptor(This,aXMLPresentationDescriptor)	\
+    ( (This)->lpVtbl -> setPresentationDescriptor(This,aXMLPresentationDescriptor) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IInitilaizeCaptureSource_INTERFACE_DEFINED__ */
+
+
+#ifndef __ICurrentMediaType_INTERFACE_DEFINED__
+#define __ICurrentMediaType_INTERFACE_DEFINED__
+
+/* interface ICurrentMediaType */
+/* [helpstring][oleautomation][uuid][object] */ 
+
+
+EXTERN_C const IID IID_ICurrentMediaType;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("2835286D-C2AF-4A66-AEDA-3ABB8A244E86")
+    ICurrentMediaType : public IUnknown
+    {
+    public:
+        virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE getMediaTypeIndex( 
+            /* [out] */ DWORD *aPtrMediaTypeIndex) = 0;
+        
+        virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE getStreamIndex( 
+            /* [out] */ DWORD *aPtrStreamIndex) = 0;
+        
+        virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE getMediaType( 
+            /* [out] */ IUnknown **aPtrMediaType) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct ICurrentMediaTypeVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ICurrentMediaType * This,
+            /* [in] */ REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ICurrentMediaType * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ICurrentMediaType * This);
+        
+        /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *getMediaTypeIndex )( 
+            ICurrentMediaType * This,
+            /* [out] */ DWORD *aPtrMediaTypeIndex);
+        
+        /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *getStreamIndex )( 
+            ICurrentMediaType * This,
+            /* [out] */ DWORD *aPtrStreamIndex);
+        
+        /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *getMediaType )( 
+            ICurrentMediaType * This,
+            /* [out] */ IUnknown **aPtrMediaType);
+        
+        END_INTERFACE
+    } ICurrentMediaTypeVtbl;
+
+    interface ICurrentMediaType
+    {
+        CONST_VTBL struct ICurrentMediaTypeVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ICurrentMediaType_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ICurrentMediaType_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ICurrentMediaType_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define ICurrentMediaType_getMediaTypeIndex(This,aPtrMediaTypeIndex)	\
+    ( (This)->lpVtbl -> getMediaTypeIndex(This,aPtrMediaTypeIndex) ) 
+
+#define ICurrentMediaType_getStreamIndex(This,aPtrStreamIndex)	\
+    ( (This)->lpVtbl -> getStreamIndex(This,aPtrStreamIndex) ) 
+
+#define ICurrentMediaType_getMediaType(This,aPtrMediaType)	\
+    ( (This)->lpVtbl -> getMediaType(This,aPtrMediaType) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ICurrentMediaType_INTERFACE_DEFINED__ */
+
+
+#ifndef __ISourceRequestResult_INTERFACE_DEFINED__
+#define __ISourceRequestResult_INTERFACE_DEFINED__
+
+/* interface ISourceRequestResult */
+/* [helpstring][local][oleautomation][uuid][object] */ 
+
+
+EXTERN_C const IID IID_ISourceRequestResult;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("80561D39-612C-42AF-B866-5E2B2E6F39C7")
+    ISourceRequestResult : public IUnknown
+    {
+    public:
+        virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE setData( 
+            /* [in] */ LPVOID aPtrData,
+            /* [in] */ DWORD aByteSize,
+            /* [in] */ BOOL aIsKeyFrame) = 0;
+        
+        virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE getStreamIndex( 
+            /* [out] */ DWORD *aPtrStreamIndex) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct ISourceRequestResultVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ISourceRequestResult * This,
+            /* [in] */ REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ISourceRequestResult * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ISourceRequestResult * This);
+        
+        /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *setData )( 
+            ISourceRequestResult * This,
+            /* [in] */ LPVOID aPtrData,
+            /* [in] */ DWORD aByteSize,
+            /* [in] */ BOOL aIsKeyFrame);
+        
+        /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *getStreamIndex )( 
+            ISourceRequestResult * This,
+            /* [out] */ DWORD *aPtrStreamIndex);
+        
+        END_INTERFACE
+    } ISourceRequestResultVtbl;
+
+    interface ISourceRequestResult
+    {
+        CONST_VTBL struct ISourceRequestResultVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ISourceRequestResult_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ISourceRequestResult_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ISourceRequestResult_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define ISourceRequestResult_setData(This,aPtrData,aByteSize,aIsKeyFrame)	\
+    ( (This)->lpVtbl -> setData(This,aPtrData,aByteSize,aIsKeyFrame) ) 
+
+#define ISourceRequestResult_getStreamIndex(This,aPtrStreamIndex)	\
+    ( (This)->lpVtbl -> getStreamIndex(This,aPtrStreamIndex) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ISourceRequestResult_INTERFACE_DEFINED__ */
+
+
+#ifndef __ICaptureProcessor_INTERFACE_DEFINED__
+#define __ICaptureProcessor_INTERFACE_DEFINED__
+
+/* interface ICaptureProcessor */
+/* [helpstring][oleautomation][uuid][object] */ 
+
+
+EXTERN_C const IID IID_ICaptureProcessor;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("F6591EF6-535E-4A83-BE0B-87135B173C78")
+    ICaptureProcessor : public IUnknown
+    {
+    public:
+        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE start( 
+            /* [in] */ LONGLONG aStartPositionInHundredNanosecondUnits,
+            /* [in] */ REFGUID aGUIDTimeFormat) = 0;
+        
+        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE stop( void) = 0;
+        
+        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE pause( void) = 0;
+        
+        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE shutdown( void) = 0;
+        
+        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE initilaize( 
+            /* [in] */ IUnknown *aPtrIInitilaizeCaptureSource) = 0;
+        
+        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE setCurrentMediaType( 
+            /* [in] */ IUnknown *aPtrICurrentMediaType) = 0;
+        
+        virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE sourceRequest( 
+            /* [in] */ IUnknown *aPtrISourceRequestResult) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct ICaptureProcessorVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ICaptureProcessor * This,
+            /* [in] */ REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ICaptureProcessor * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ICaptureProcessor * This);
+        
+        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *start )( 
+            ICaptureProcessor * This,
+            /* [in] */ LONGLONG aStartPositionInHundredNanosecondUnits,
+            /* [in] */ REFGUID aGUIDTimeFormat);
+        
+        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *stop )( 
+            ICaptureProcessor * This);
+        
+        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *pause )( 
+            ICaptureProcessor * This);
+        
+        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *shutdown )( 
+            ICaptureProcessor * This);
+        
+        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *initilaize )( 
+            ICaptureProcessor * This,
+            /* [in] */ IUnknown *aPtrIInitilaizeCaptureSource);
+        
+        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *setCurrentMediaType )( 
+            ICaptureProcessor * This,
+            /* [in] */ IUnknown *aPtrICurrentMediaType);
+        
+        /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *sourceRequest )( 
+            ICaptureProcessor * This,
+            /* [in] */ IUnknown *aPtrISourceRequestResult);
+        
+        END_INTERFACE
+    } ICaptureProcessorVtbl;
+
+    interface ICaptureProcessor
+    {
+        CONST_VTBL struct ICaptureProcessorVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ICaptureProcessor_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ICaptureProcessor_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ICaptureProcessor_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define ICaptureProcessor_start(This,aStartPositionInHundredNanosecondUnits,aGUIDTimeFormat)	\
+    ( (This)->lpVtbl -> start(This,aStartPositionInHundredNanosecondUnits,aGUIDTimeFormat) ) 
+
+#define ICaptureProcessor_stop(This)	\
+    ( (This)->lpVtbl -> stop(This) ) 
+
+#define ICaptureProcessor_pause(This)	\
+    ( (This)->lpVtbl -> pause(This) ) 
+
+#define ICaptureProcessor_shutdown(This)	\
+    ( (This)->lpVtbl -> shutdown(This) ) 
+
+#define ICaptureProcessor_initilaize(This,aPtrIInitilaizeCaptureSource)	\
+    ( (This)->lpVtbl -> initilaize(This,aPtrIInitilaizeCaptureSource) ) 
+
+#define ICaptureProcessor_setCurrentMediaType(This,aPtrICurrentMediaType)	\
+    ( (This)->lpVtbl -> setCurrentMediaType(This,aPtrICurrentMediaType) ) 
+
+#define ICaptureProcessor_sourceRequest(This,aPtrISourceRequestResult)	\
+    ( (This)->lpVtbl -> sourceRequest(This,aPtrISourceRequestResult) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ICaptureProcessor_INTERFACE_DEFINED__ */
+
+
+#ifndef __IRenderingControl_INTERFACE_DEFINED__
+#define __IRenderingControl_INTERFACE_DEFINED__
+
+/* interface IRenderingControl */
+/* [helpstring][local][oleautomation][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IRenderingControl;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("1CBCAF1C-1809-41DE-A728-23DBF86A6170")
+    IRenderingControl : public IDispatch
+    {
+    public:
+        virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE enableInnerRendering( 
+            /* [in] */ IUnknown *aPtrEVROutputNode,
+            /* [in] */ BOOL aIsInnerRendering) = 0;
+        
+        virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE renderToTarget( 
+            /* [in] */ IUnknown *aPtrEVROutputNode,
+            /* [in] */ IUnknown *aPtrRenderTarget,
+            /* [in] */ BOOL aCopyMode) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IRenderingControlVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IRenderingControl * This,
+            /* [in] */ REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IRenderingControl * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IRenderingControl * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IRenderingControl * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IRenderingControl * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IRenderingControl * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IRenderingControl * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *enableInnerRendering )( 
+            IRenderingControl * This,
+            /* [in] */ IUnknown *aPtrEVROutputNode,
+            /* [in] */ BOOL aIsInnerRendering);
+        
+        /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *renderToTarget )( 
+            IRenderingControl * This,
+            /* [in] */ IUnknown *aPtrEVROutputNode,
+            /* [in] */ IUnknown *aPtrRenderTarget,
+            /* [in] */ BOOL aCopyMode);
+        
+        END_INTERFACE
+    } IRenderingControlVtbl;
+
+    interface IRenderingControl
+    {
+        CONST_VTBL struct IRenderingControlVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IRenderingControl_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IRenderingControl_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IRenderingControl_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IRenderingControl_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define IRenderingControl_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define IRenderingControl_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define IRenderingControl_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define IRenderingControl_enableInnerRendering(This,aPtrEVROutputNode,aIsInnerRendering)	\
+    ( (This)->lpVtbl -> enableInnerRendering(This,aPtrEVROutputNode,aIsInnerRendering) ) 
+
+#define IRenderingControl_renderToTarget(This,aPtrEVROutputNode,aPtrRenderTarget,aCopyMode)	\
+    ( (This)->lpVtbl -> renderToTarget(This,aPtrEVROutputNode,aPtrRenderTarget,aCopyMode) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IRenderingControl_INTERFACE_DEFINED__ */
+
+
+#ifndef __ISwitcherControl_INTERFACE_DEFINED__
+#define __ISwitcherControl_INTERFACE_DEFINED__
+
+/* interface ISwitcherControl */
+/* [helpstring][local][oleautomation][uuid][object] */ 
+
+
+EXTERN_C const IID IID_ISwitcherControl;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("9D9FEEFB-0905-4829-866E-22AD28320183")
+    ISwitcherControl : public IDispatch
+    {
+    public:
+        virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE pauseSwitchers( 
+            /* [in] */ DWORD aSessionDescriptor) = 0;
+        
+        virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE resumeSwitchers( 
+            /* [in] */ DWORD aSessionDescriptor) = 0;
+        
+        virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE pauseSwitcher( 
+            /* [in] */ IUnknown *aPtrSwitcherNode) = 0;
+        
+        virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE resumeSwitcher( 
+            /* [in] */ IUnknown *aPtrSwitcherNode) = 0;
+        
+        virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE detachSwitchers( 
+            /* [in] */ DWORD aSessionDescriptor) = 0;
+        
+        virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE attachSwitcher( 
+            /* [in] */ IUnknown *aPtrSwitcherNode,
+            /* [in] */ IUnknown *aPtrDownStreamNode) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct ISwitcherControlVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ISwitcherControl * This,
+            /* [in] */ REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ISwitcherControl * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ISwitcherControl * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            ISwitcherControl * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            ISwitcherControl * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            ISwitcherControl * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            ISwitcherControl * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *pauseSwitchers )( 
+            ISwitcherControl * This,
+            /* [in] */ DWORD aSessionDescriptor);
+        
+        /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *resumeSwitchers )( 
+            ISwitcherControl * This,
+            /* [in] */ DWORD aSessionDescriptor);
+        
+        /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *pauseSwitcher )( 
+            ISwitcherControl * This,
+            /* [in] */ IUnknown *aPtrSwitcherNode);
+        
+        /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *resumeSwitcher )( 
+            ISwitcherControl * This,
+            /* [in] */ IUnknown *aPtrSwitcherNode);
+        
+        /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *detachSwitchers )( 
+            ISwitcherControl * This,
+            /* [in] */ DWORD aSessionDescriptor);
+        
+        /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *attachSwitcher )( 
+            ISwitcherControl * This,
+            /* [in] */ IUnknown *aPtrSwitcherNode,
+            /* [in] */ IUnknown *aPtrDownStreamNode);
+        
+        END_INTERFACE
+    } ISwitcherControlVtbl;
+
+    interface ISwitcherControl
+    {
+        CONST_VTBL struct ISwitcherControlVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ISwitcherControl_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ISwitcherControl_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ISwitcherControl_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define ISwitcherControl_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define ISwitcherControl_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define ISwitcherControl_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define ISwitcherControl_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define ISwitcherControl_pauseSwitchers(This,aSessionDescriptor)	\
+    ( (This)->lpVtbl -> pauseSwitchers(This,aSessionDescriptor) ) 
+
+#define ISwitcherControl_resumeSwitchers(This,aSessionDescriptor)	\
+    ( (This)->lpVtbl -> resumeSwitchers(This,aSessionDescriptor) ) 
+
+#define ISwitcherControl_pauseSwitcher(This,aPtrSwitcherNode)	\
+    ( (This)->lpVtbl -> pauseSwitcher(This,aPtrSwitcherNode) ) 
+
+#define ISwitcherControl_resumeSwitcher(This,aPtrSwitcherNode)	\
+    ( (This)->lpVtbl -> resumeSwitcher(This,aPtrSwitcherNode) ) 
+
+#define ISwitcherControl_detachSwitchers(This,aSessionDescriptor)	\
+    ( (This)->lpVtbl -> detachSwitchers(This,aSessionDescriptor) ) 
+
+#define ISwitcherControl_attachSwitcher(This,aPtrSwitcherNode,aPtrDownStreamNode)	\
+    ( (This)->lpVtbl -> attachSwitcher(This,aPtrSwitcherNode,aPtrDownStreamNode) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ISwitcherControl_INTERFACE_DEFINED__ */
+
+
+#ifndef __IVideoMixerControl_INTERFACE_DEFINED__
+#define __IVideoMixerControl_INTERFACE_DEFINED__
+
+/* interface IVideoMixerControl */
+/* [dual][helpstring][oleautomation][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IVideoMixerControl;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("6BFFE928-3CB4-4BE2-9107-A0FA504EF623")
+    IVideoMixerControl : public IDispatch
+    {
+    public:
+        virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE setPosition( 
+            /* [in] */ IUnknown *aPtrVideoMixerNode,
+            /* [in] */ FLOAT aLeft,
+            /* [in] */ FLOAT aRight,
+            /* [in] */ FLOAT aTop,
+            /* [in] */ FLOAT aBottom) = 0;
+        
+        virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE setSrcPosition( 
+            /* [in] */ IUnknown *aPtrVideoMixerNode,
+            /* [in] */ FLOAT aLeft,
+            /* [in] */ FLOAT aRight,
+            /* [in] */ FLOAT aTop,
+            /* [in] */ FLOAT aBottom) = 0;
+        
+        virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE setZOrder( 
+            /* [in] */ IUnknown *aPtrVideoMixerNode,
+            /* [in] */ DWORD aZOrder) = 0;
+        
+        virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE setOpacity( 
+            /* [in] */ IUnknown *aPtrVideoMixerNode,
+            /* [in] */ FLOAT aOpacity) = 0;
+        
+        virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE flush( 
+            /* [in] */ IUnknown *aPtrVideoMixerNode) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IVideoMixerControlVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IVideoMixerControl * This,
+            /* [in] */ REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IVideoMixerControl * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IVideoMixerControl * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IVideoMixerControl * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IVideoMixerControl * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IVideoMixerControl * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IVideoMixerControl * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *setPosition )( 
+            IVideoMixerControl * This,
+            /* [in] */ IUnknown *aPtrVideoMixerNode,
+            /* [in] */ FLOAT aLeft,
+            /* [in] */ FLOAT aRight,
+            /* [in] */ FLOAT aTop,
+            /* [in] */ FLOAT aBottom);
+        
+        /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *setSrcPosition )( 
+            IVideoMixerControl * This,
+            /* [in] */ IUnknown *aPtrVideoMixerNode,
+            /* [in] */ FLOAT aLeft,
+            /* [in] */ FLOAT aRight,
+            /* [in] */ FLOAT aTop,
+            /* [in] */ FLOAT aBottom);
+        
+        /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *setZOrder )( 
+            IVideoMixerControl * This,
+            /* [in] */ IUnknown *aPtrVideoMixerNode,
+            /* [in] */ DWORD aZOrder);
+        
+        /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *setOpacity )( 
+            IVideoMixerControl * This,
+            /* [in] */ IUnknown *aPtrVideoMixerNode,
+            /* [in] */ FLOAT aOpacity);
+        
+        /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *flush )( 
+            IVideoMixerControl * This,
+            /* [in] */ IUnknown *aPtrVideoMixerNode);
+        
+        END_INTERFACE
+    } IVideoMixerControlVtbl;
+
+    interface IVideoMixerControl
+    {
+        CONST_VTBL struct IVideoMixerControlVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IVideoMixerControl_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IVideoMixerControl_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IVideoMixerControl_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IVideoMixerControl_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define IVideoMixerControl_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define IVideoMixerControl_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define IVideoMixerControl_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define IVideoMixerControl_setPosition(This,aPtrVideoMixerNode,aLeft,aRight,aTop,aBottom)	\
+    ( (This)->lpVtbl -> setPosition(This,aPtrVideoMixerNode,aLeft,aRight,aTop,aBottom) ) 
+
+#define IVideoMixerControl_setSrcPosition(This,aPtrVideoMixerNode,aLeft,aRight,aTop,aBottom)	\
+    ( (This)->lpVtbl -> setSrcPosition(This,aPtrVideoMixerNode,aLeft,aRight,aTop,aBottom) ) 
+
+#define IVideoMixerControl_setZOrder(This,aPtrVideoMixerNode,aZOrder)	\
+    ( (This)->lpVtbl -> setZOrder(This,aPtrVideoMixerNode,aZOrder) ) 
+
+#define IVideoMixerControl_setOpacity(This,aPtrVideoMixerNode,aOpacity)	\
+    ( (This)->lpVtbl -> setOpacity(This,aPtrVideoMixerNode,aOpacity) ) 
+
+#define IVideoMixerControl_flush(This,aPtrVideoMixerNode)	\
+    ( (This)->lpVtbl -> flush(This,aPtrVideoMixerNode) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IVideoMixerControl_INTERFACE_DEFINED__ */
+
+
+#ifndef __IAudioMixerControl_INTERFACE_DEFINED__
+#define __IAudioMixerControl_INTERFACE_DEFINED__
+
+/* interface IAudioMixerControl */
+/* [dual][helpstring][oleautomation][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IAudioMixerControl;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("BD1C6DB2-E10B-4233-808D-68C4B03C15A4")
+    IAudioMixerControl : public IDispatch
+    {
+    public:
+        virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE setRelativeVolume( 
+            /* [in] */ IUnknown *aPtrAudioMixerNode,
+            /* [in] */ FLOAT aRelativeVolume) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IAudioMixerControlVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IAudioMixerControl * This,
+            /* [in] */ REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IAudioMixerControl * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IAudioMixerControl * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IAudioMixerControl * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IAudioMixerControl * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IAudioMixerControl * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IAudioMixerControl * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *setRelativeVolume )( 
+            IAudioMixerControl * This,
+            /* [in] */ IUnknown *aPtrAudioMixerNode,
+            /* [in] */ FLOAT aRelativeVolume);
+        
+        END_INTERFACE
+    } IAudioMixerControlVtbl;
+
+    interface IAudioMixerControl
+    {
+        CONST_VTBL struct IAudioMixerControlVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IAudioMixerControl_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IAudioMixerControl_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IAudioMixerControl_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IAudioMixerControl_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define IAudioMixerControl_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define IAudioMixerControl_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define IAudioMixerControl_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define IAudioMixerControl_setRelativeVolume(This,aPtrAudioMixerNode,aRelativeVolume)	\
+    ( (This)->lpVtbl -> setRelativeVolume(This,aPtrAudioMixerNode,aRelativeVolume) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IAudioMixerControl_INTERFACE_DEFINED__ */
+
+
+#ifndef __ISARSinkFactory_INTERFACE_DEFINED__
+#define __ISARSinkFactory_INTERFACE_DEFINED__
+
+/* interface ISARSinkFactory */
+/* [dual][helpstring][local][oleautomation][uuid][object] */ 
+
+
+EXTERN_C const IID IID_ISARSinkFactory;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("62F99475-1754-4B2B-BFA5-277BDCE03C4F")
+    ISARSinkFactory : public IDispatch
+    {
+    public:
+        virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE createOutputNode( 
+            /* [out] */ IUnknown **aPtrPtrTopologyNode) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct ISARSinkFactoryVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ISARSinkFactory * This,
+            /* [in] */ REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ISARSinkFactory * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ISARSinkFactory * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            ISARSinkFactory * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            ISARSinkFactory * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            ISARSinkFactory * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            ISARSinkFactory * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *createOutputNode )( 
+            ISARSinkFactory * This,
+            /* [out] */ IUnknown **aPtrPtrTopologyNode);
+        
+        END_INTERFACE
+    } ISARSinkFactoryVtbl;
+
+    interface ISARSinkFactory
+    {
+        CONST_VTBL struct ISARSinkFactoryVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ISARSinkFactory_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ISARSinkFactory_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ISARSinkFactory_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define ISARSinkFactory_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define ISARSinkFactory_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define ISARSinkFactory_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define ISARSinkFactory_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define ISARSinkFactory_createOutputNode(This,aPtrPtrTopologyNode)	\
+    ( (This)->lpVtbl -> createOutputNode(This,aPtrPtrTopologyNode) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ISARSinkFactory_INTERFACE_DEFINED__ */
+
+
+#ifndef __ISARVolumeControl_INTERFACE_DEFINED__
+#define __ISARVolumeControl_INTERFACE_DEFINED__
+
+/* interface ISARVolumeControl */
+/* [dual][helpstring][local][oleautomation][uuid][object] */ 
+
+
+EXTERN_C const IID IID_ISARVolumeControl;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("9A0E43CA-D5D0-4774-8548-E31A9DDE36FB")
+    ISARVolumeControl : public IDispatch
+    {
+    public:
+        virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE getChannelCount( 
+            /* [in] */ IUnknown *aPtrSARNode,
+            /* [out] */ UINT32 *aPtrCount) = 0;
+        
+        virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE setChannelVolume( 
+            /* [in] */ IUnknown *aPtrSARNode,
+            /* [in] */ UINT32 aIndex,
+            /* [in] */ const float aLevel) = 0;
+        
+        virtual /* [id][helpstring] */ HRESULT STDMETHODCALLTYPE getChannelVolume( 
+            /* [in] */ IUnknown *aPtrSARNode,
+            /* [in] */ UINT32 aIndex,
+            /* [out] */ float *aPtrLevel) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct ISARVolumeControlVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ISARVolumeControl * This,
+            /* [in] */ REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ISARVolumeControl * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ISARVolumeControl * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            ISARVolumeControl * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            ISARVolumeControl * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            ISARVolumeControl * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [range][in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            ISARVolumeControl * This,
+            /* [annotation][in] */ 
+            _In_  DISPID dispIdMember,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][in] */ 
+            _In_  LCID lcid,
+            /* [annotation][in] */ 
+            _In_  WORD wFlags,
+            /* [annotation][out][in] */ 
+            _In_  DISPPARAMS *pDispParams,
+            /* [annotation][out] */ 
+            _Out_opt_  VARIANT *pVarResult,
+            /* [annotation][out] */ 
+            _Out_opt_  EXCEPINFO *pExcepInfo,
+            /* [annotation][out] */ 
+            _Out_opt_  UINT *puArgErr);
+        
+        /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *getChannelCount )( 
+            ISARVolumeControl * This,
+            /* [in] */ IUnknown *aPtrSARNode,
+            /* [out] */ UINT32 *aPtrCount);
+        
+        /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *setChannelVolume )( 
+            ISARVolumeControl * This,
+            /* [in] */ IUnknown *aPtrSARNode,
+            /* [in] */ UINT32 aIndex,
+            /* [in] */ const float aLevel);
+        
+        /* [id][helpstring] */ HRESULT ( STDMETHODCALLTYPE *getChannelVolume )( 
+            ISARVolumeControl * This,
+            /* [in] */ IUnknown *aPtrSARNode,
+            /* [in] */ UINT32 aIndex,
+            /* [out] */ float *aPtrLevel);
+        
+        END_INTERFACE
+    } ISARVolumeControlVtbl;
+
+    interface ISARVolumeControl
+    {
+        CONST_VTBL struct ISARVolumeControlVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ISARVolumeControl_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ISARVolumeControl_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ISARVolumeControl_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define ISARVolumeControl_GetTypeInfoCount(This,pctinfo)	\
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
+
+#define ISARVolumeControl_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
+
+#define ISARVolumeControl_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
+
+#define ISARVolumeControl_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
+
+
+#define ISARVolumeControl_getChannelCount(This,aPtrSARNode,aPtrCount)	\
+    ( (This)->lpVtbl -> getChannelCount(This,aPtrSARNode,aPtrCount) ) 
+
+#define ISARVolumeControl_setChannelVolume(This,aPtrSARNode,aIndex,aLevel)	\
+    ( (This)->lpVtbl -> setChannelVolume(This,aPtrSARNode,aIndex,aLevel) ) 
+
+#define ISARVolumeControl_getChannelVolume(This,aPtrSARNode,aIndex,aPtrLevel)	\
+    ( (This)->lpVtbl -> getChannelVolume(This,aPtrSARNode,aIndex,aPtrLevel) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ISARVolumeControl_INTERFACE_DEFINED__ */
+
+
 
 #ifndef __CaptureManagerLibrary_LIBRARY_DEFINED__
 #define __CaptureManagerLibrary_LIBRARY_DEFINED__
 
 /* library CaptureManagerLibrary */
 /* [helpstring][version][uuid] */ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3582,6 +5824,16 @@ unsigned long             __RPC_USER  VARIANT_UserSize(     unsigned long *, uns
 unsigned char * __RPC_USER  VARIANT_UserMarshal(  unsigned long *, unsigned char *, VARIANT * ); 
 unsigned char * __RPC_USER  VARIANT_UserUnmarshal(unsigned long *, unsigned char *, VARIANT * ); 
 void                      __RPC_USER  VARIANT_UserFree(     unsigned long *, VARIANT * ); 
+
+unsigned long             __RPC_USER  BSTR_UserSize64(     unsigned long *, unsigned long            , BSTR * ); 
+unsigned char * __RPC_USER  BSTR_UserMarshal64(  unsigned long *, unsigned char *, BSTR * ); 
+unsigned char * __RPC_USER  BSTR_UserUnmarshal64(unsigned long *, unsigned char *, BSTR * ); 
+void                      __RPC_USER  BSTR_UserFree64(     unsigned long *, BSTR * ); 
+
+unsigned long             __RPC_USER  VARIANT_UserSize64(     unsigned long *, unsigned long            , VARIANT * ); 
+unsigned char * __RPC_USER  VARIANT_UserMarshal64(  unsigned long *, unsigned char *, VARIANT * ); 
+unsigned char * __RPC_USER  VARIANT_UserUnmarshal64(unsigned long *, unsigned char *, VARIANT * ); 
+void                      __RPC_USER  VARIANT_UserFree64(     unsigned long *, VARIANT * ); 
 
 /* end of Additional Prototypes */
 

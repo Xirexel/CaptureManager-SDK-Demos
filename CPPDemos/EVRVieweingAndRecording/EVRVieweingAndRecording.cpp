@@ -21,24 +21,30 @@
 #include <fstream>
 #include <iostream>
 #include <map>
-#include "Common/ComPtrCustom.h"
-#include "Common/pugixml.hpp"
-#include "Common/CaptureManagerTypeInfo.h"
-#include "Common/CaptureManagerLoader.h"
+#include "../Common/ComPtrCustom.h"
+#include "../Common/pugixml.hpp"
+#include "../Common/CaptureManagerTypeInfo.h"
+#include "../Common/CaptureManagerLoader.h"
 
 #define IID_PPV_ARGSIUnknown(ppType) __uuidof(**(ppType)), (IUnknown**)(ppType)
 
 
-CLSID VideoEncoderCLSID;
+class DECLSPEC_UUID("EE8C3745-F45B-42B3-A8CC-C7A696440955")
+	VaribleBitRateCLSID;
 
-CLSID AudioEncoderCLSID;
+class DECLSPEC_UUID("CA37E2BE-BEC0-4B17-946D-44FBC1B3DF55")
+	ConstantBitRateCLSID;
 
-GUID VideoEncoderModeCLSID;
+class DECLSPEC_UUID("A2A56DA1-EB84-460E-9F05-FEE51D8C81E3")
+	ASFCLSID;
 
-GUID AudioEncoderModeCLSID;
+//<EncoderFactory Name="H264 Encoder MFT" Title="H264 Encoder MFT" CLSID="{6CA50344-051A-4DED-9779-A43305165E35}" /> 
+class DECLSPEC_UUID("7e320092-596a-41b2-bbeb-175d10504eb6")
+	VideoEncoderCLSID;
 
-
-GUID SinkCLSID;
+//<EncoderFactory Name="Microsoft AAC Audio Encoder MFT" Title="Microsoft AAC Audio Encoder MFT" CLSID="{93AF0C51-2275-45D2-A35B-F2BA21CAED00}" />
+class DECLSPEC_UUID("70f598e9-f4ab-495a-99e2-a7c4d3d89abf")
+	AudioEncoderCLSID;
 
 
 using namespace pugi;
@@ -307,50 +313,6 @@ int _tmain(int argc, _TCHAR* argv[])
 		return lhresult;
 
 
-
-	// Create Video renderer node
-	// get ISinkControl inetrface
-	CComPtrCustom<ISinkControl> lSinkControl;
-
-	lhresult = g_CaptureManagerControl->createControl(
-		IID_PPV_ARGSIUnknown(&lSinkControl));
-
-	if (FAILED(lhresult))
-		return lhresult;
-
-
-	BSTR lXMLstring = nullptr;
-
-
-	lSinkControl->getCollectionOfSinks(&lXMLstring);
-
-	xml_document lSinksXmlDoc;
-
-	auto k = lSinksXmlDoc.load_string(lXMLstring);
-
-	if (lXMLstring != nullptr)
-		SysFreeString(lXMLstring);
-
-	auto lSinkCLSIDNode = lSinksXmlDoc.select_node(L"/SinkFactories/SinkFactory[@GUID='{D6E342E3-7DDD-4858-AB91-4253643864C2}']/Value.ValueParts/ValuePart");
-
-	if (lSinkCLSIDNode.node().empty())
-		return -1;
-
-	std::wstring lfileExt(lSinkCLSIDNode.node().attribute(L"Value").as_string());
-
-
-	lhresult = IIDFromString(lSinkCLSIDNode.node().attribute(L"GUID").as_string(),
-		&SinkCLSID);
-
-	// get IEncoderControl inereface
-	CComPtrCustom<IEncoderControl> lEncoderControl;
-
-	lhresult = g_CaptureManagerControl->createControl(
-		IID_PPV_ARGSIUnknown(&lEncoderControl));
-
-	if (FAILED(lhresult))
-		return lhresult;
-
 	// get ISourceControl inetrface
 	CComPtrCustom<ISourceControl> lSourceControl;
 
@@ -412,7 +374,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	if (g_AudioSourceIndex == 0)
 		return -1;
 
-	std::wcout << std::endl << L"Enter name of output file (with ." << lfileExt << " ext): ";
+	std::wcout << std::endl << L"Enter name of output file (with .asf ext): ";
 
 	std::wcin >> g_fileName;
 
@@ -457,33 +419,9 @@ int _tmain(int argc, _TCHAR* argv[])
 	if (g_VideoEncoderNodeFactory == nullptr)
 		return -1;
 
-	lXMLstring = nullptr;
-
-	lhresult = lEncoderControl->getMediaTypeCollectionOfEncoder(
-		lVideoSourceMediaType,
-		VideoEncoderCLSID,
-		&lXMLstring);
-
-	xml_document lVideoEncoderMediaTypeXmlDoc;
-
-	k = lVideoEncoderMediaTypeXmlDoc.load_string(lXMLstring);
-
-	if (lXMLstring != nullptr)
-		SysFreeString(lXMLstring);
-
-	lXMLstring = nullptr;
-
-	auto lvideoEncoderModeAttr = lVideoEncoderMediaTypeXmlDoc.select_node(L"/EncoderMediaTypes/Group/@GUID");
-
-
-	lhresult = IIDFromString(lvideoEncoderModeAttr.attribute().as_string(),
-		&VideoEncoderModeCLSID);
-
-
-
 	createCompresssedMediaType(
 		lVideoSourceMediaType,
-		VideoEncoderModeCLSID,
+		__uuidof(VaribleBitRateCLSID),
 		g_VideoEncoderNodeFactory,
 		&lVideoCompressedMediaType);
 
@@ -496,32 +434,9 @@ int _tmain(int argc, _TCHAR* argv[])
 	if (g_AudioEncoderNodeFactory == nullptr)
 		return -1;
 
-
-
-	lhresult = lEncoderControl->getMediaTypeCollectionOfEncoder(
-		lAudioSourceMediaType,
-		AudioEncoderCLSID,
-		&lXMLstring);
-
-	xml_document lAudioEncoderMediaTypeXmlDoc;
-
-	k = lAudioEncoderMediaTypeXmlDoc.load_string(lXMLstring);
-
-	if (lXMLstring != nullptr)
-		SysFreeString(lXMLstring);
-
-	lXMLstring = nullptr;
-
-	auto laudioEncoderModeAttr = lAudioEncoderMediaTypeXmlDoc.select_node(L"/EncoderMediaTypes/Group/@GUID");
-
-
-	lhresult = IIDFromString(laudioEncoderModeAttr.attribute().as_string(),
-		&AudioEncoderModeCLSID);
-
-
 	createCompresssedMediaType(
 		lAudioSourceMediaType,
-		AudioEncoderModeCLSID,
+		__uuidof(ConstantBitRateCLSID),
 		g_AudioEncoderNodeFactory,
 		&lAudioCompressedMediaType);
 
@@ -551,11 +466,9 @@ int _tmain(int argc, _TCHAR* argv[])
 	if (g_VideoEncoderNodeFactory == nullptr)
 		return -1;
 
-
-
 	createEncoderNode(
 		lVideoSourceMediaType,
-		VideoEncoderModeCLSID,
+		__uuidof(VaribleBitRateCLSID),
 		g_VideoEncoderNodeFactory,
 		lVideoOutputNode,
 		&lVideoEncoderNode);
@@ -571,12 +484,21 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	createEncoderNode(
 		lAudioSourceMediaType,
-		AudioEncoderModeCLSID,
+		__uuidof(ConstantBitRateCLSID),
 		g_AudioEncoderNodeFactory,
 		lAudioOutputNode,
 		&lAudioEncoderNode);
 
 
+	// Create Video renderer node
+	// get ISinkControl inetrface
+	CComPtrCustom<ISinkControl> lSinkControl;
+
+	lhresult = g_CaptureManagerControl->createControl(
+		IID_PPV_ARGSIUnknown(&lSinkControl));
+
+	if (FAILED(lhresult))
+		return lhresult;
 
 	CComPtrCustom<IEVRSinkFactory> lEVRSinkFactory;
 
@@ -806,42 +728,47 @@ int initEncoders()
 	lhresult = g_CaptureManagerControl->createControl(
 		IID_PPV_ARGSIUnknown(&lEncoderControl));
 
-	BSTR lXMLstring = nullptr;
-
-	lhresult = lEncoderControl->getCollectionOfEncoders(&lXMLstring);
-
-	xml_document lEncodersXmlDoc;
-
-	auto k = lEncodersXmlDoc.load_string(lXMLstring);
-
-	if (lXMLstring != nullptr)
-		SysFreeString(lXMLstring);
-	
-	auto lvideoEncoderCLSIDNode = lEncodersXmlDoc.select_node(L"/EncoderFactories/Group[@GUID='{73646976-0000-0010-8000-00AA00389B71}']/EncoderFactory[1]/@CLSID");
-
-	auto laudioEncoderCLSIDNode = lEncodersXmlDoc.select_node(L"/EncoderFactories/Group[@GUID='{73647561-0000-0010-8000-00AA00389B71}']/EncoderFactory[1]/@CLSID");
-
-	
-
-	lhresult = IIDFromString(lvideoEncoderCLSIDNode.attribute().as_string(),
-		&VideoEncoderCLSID);
 
 	// get Video Encoder Node Factory
 
 	lhresult = lEncoderControl->createEncoderNodeFactory(
-		VideoEncoderCLSID, IID_PPV_ARGSIUnknown(&g_VideoEncoderNodeFactory));
-
-
-
-	lhresult = IIDFromString(laudioEncoderCLSIDNode.attribute().as_string(),
-		&AudioEncoderCLSID);
+		__uuidof(VideoEncoderCLSID), IID_PPV_ARGSIUnknown(&g_VideoEncoderNodeFactory));
 
 	// get Audio Encoder Node Factory
 
 	lhresult = lEncoderControl->createEncoderNodeFactory(
-		AudioEncoderCLSID, IID_PPV_ARGSIUnknown(&g_AudioEncoderNodeFactory));
+		__uuidof(AudioEncoderCLSID), IID_PPV_ARGSIUnknown(&g_AudioEncoderNodeFactory));
 
-	
+
+	//BSTR lXMLString = nullptr;
+
+	//lEncoderControl->getCollectionOfEncoders(&lXMLString);
+
+	//SysFreeString(lXMLString);
+
+	/*
+
+
+	<Group Title="Video" GUID="{73646976-0000-0010-8000-00AA00389B71}">
+	<EncoderFactory Name="H264 Encoder MFT" Title="H264 Encoder MFT" CLSID="{6CA50344-051A-4DED-9779-A43305165E35}" />
+	<EncoderFactory Name="Intel® Quick Sync Video H.264 Encoder MFT" Title="Intel® Quick Sync Video H.264 Encoder MFT" CLSID="{4BE8D3C0-0515-4A37-AD55-E4BAE19AF471}" />
+	<EncoderFactory Name="WMVideo8 Encoder MFT" Title="WMVideo8 Encoder MFT" CLSID="{7E320092-596A-41B2-BBEB-175D10504EB6}" />
+	<EncoderFactory Name="WMVideo9 Encoder MFT" Title="WMVideo9 Encoder MFT" CLSID="{D23B90D0-144F-46BD-841D-59E4EB19DC59}" />
+	<EncoderFactory Name="WMVideo9 Screen Encoder MFT" Title="WMVideo9 Screen Encoder MFT" CLSID="{F7FFE0A0-A4F5-44B5-949E-15ED2BC66F9D}" />
+	</Group>
+	- <Group Title="Audio" GUID="{73647561-0000-0010-8000-00AA00389B71}">
+	<EncoderFactory Name="MP3 Encoder ACM Wrapper MFT" Title="MP3 Encoder ACM Wrapper MFT" CLSID="{11103421-354C-4CCA-A7A3-1AFF9A5B6701}" />
+	<EncoderFactory Name="Microsoft AAC Audio Encoder MFT" Title="Microsoft AAC Audio Encoder MFT" CLSID="{93AF0C51-2275-45D2-A35B-F2BA21CAED00}" />
+	<EncoderFactory Name="Microsoft Dolby Digital Encoder MFT" Title="Microsoft Dolby Digital Encoder MFT" CLSID="{AC3315C9-F481-45D7-826C-0B406C1F64B8}" />
+	<EncoderFactory Name="Microsoft MPEG-2 Audio Encoder MFT" Title="Microsoft MPEG-2 Audio Encoder MFT" CLSID="{46A4DD5C-73F8-4304-94DF-308F760974F4}" />
+	<EncoderFactory Name="WM Speech Encoder DMO" Title="WM Speech Encoder DMO" CLSID="{1F1F4E1A-2252-4063-84BB-EEE75F8856D5}" />
+	<EncoderFactory Name="WMAudio Encoder MFT" Title="WMAudio Encoder MFT" CLSID="{70F598E9-F4AB-495A-99E2-A7C4D3D89ABF}" />
+	</Group>
+
+
+	*/
+
+
 	return lhresult;
 }
 
@@ -950,11 +877,9 @@ HRESULT createOutputNodes(
 			return lhresult;
 
 		CComPtrCustom<IFileSinkFactory> lFileSinkFactory;
-		
-		
 
 		lhresult = lSinkControl->createSinkFactory(
-			SinkCLSID,
+			__uuidof(ASFCLSID),
 			IID_PPV_ARGSIUnknown(&lFileSinkFactory));
 
 		if (FAILED(lhresult))
@@ -1026,7 +951,7 @@ HRESULT createOutputNodes(
 		if (FAILED(lhresult))
 			return lhresult;
 
-		if (theOutputNodeArray.vt == (VT_SAFEARRAY | VT_UNKNOWN))
+		if (theOutputNodeArray.vt == VT_SAFEARRAY | VT_UNKNOWN)
 		{
 			i = 0;
 

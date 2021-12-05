@@ -362,22 +362,7 @@ namespace WPFStreamer
 
                 string lSymbolicLink = lNode.Value;
 
-                lSourceNode = mStreamsComboBox.SelectedItem as XmlNode;
-
-                if (lSourceNode == null)
-                    break;
-
-                lNode = lSourceNode.SelectSingleNode("@Index");
-
-                if (lNode == null)
-                    break;
-
                 uint lStreamIndex = 0;
-
-                if (!uint.TryParse(lNode.Value, out lStreamIndex))
-                {
-                    break;
-                }
 
                 lSourceNode = mMediaTypesComboBox.SelectedItem as XmlNode;
 

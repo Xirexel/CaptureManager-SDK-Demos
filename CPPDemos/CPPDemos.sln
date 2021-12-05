@@ -12,6 +12,14 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WaterMarkInjector", "WaterMarkInjector\WaterMarkInjector.vcxproj", "{7A342C7A-74AB-4581-B647-C57E8D948B6F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{B6C00AF2-F75D-43C8-9BCB-E2A289C6DFBB}"
+	ProjectSection(SolutionItems) = preProject
+		Common\CaptureManagerLoader.h = Common\CaptureManagerLoader.h
+		Common\CaptureManagerTypeInfo.h = Common\CaptureManagerTypeInfo.h
+		Common\ComPtrCustom.h = Common\ComPtrCustom.h
+		Common\pugiconfig.hpp = Common\pugiconfig.hpp
+		Common\pugixml.cpp = Common\pugixml.cpp
+		Common\pugixml.hpp = Common\pugixml.hpp
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EVRVieweingAndRecording", "EVRVieweingAndRecording\EVRVieweingAndRecording.vcxproj", "{462FBD9C-4678-4DB8-A226-D9E32DC7B539}"
 EndProject
@@ -96,6 +104,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {D70C4379-432E-42CD-A06F-4942E435099B}
+		SolutionGuid = {4295F5F1-17A8-4285-AAE1-3E3B3225056B}
 	EndGlobalSection
 EndGlobal

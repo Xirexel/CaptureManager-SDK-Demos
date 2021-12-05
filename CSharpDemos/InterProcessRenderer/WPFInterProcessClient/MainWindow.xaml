@@ -2,6 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:WPFInterProcessClient"
+        xmlns:tools="clr-namespace:Tools"
         Title="MainWindow" Height="500" Width="800"
         Closing="Window_Closing" WindowStartupLocation="CenterScreen">
     <Window.Resources>
@@ -9,6 +10,8 @@
         <XmlDataProvider x:Key="XmlWebCamParametrsProvider" />
         <XmlDataProvider x:Key="XmlEVRStreamFiltersProvider" />
         <XmlDataProvider x:Key="XmlEVRStreamOutputFeaturesProvider" />
+        <tools:SubTypeNameConverter x:Key="mSubTypeNameConverter"/>
+        <tools:MediaTypeManager x:Key="mMediaTypeManager"/>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -22,7 +25,8 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <ComboBox x:Name="mSourcesComboBox" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0">
+            <ComboBox x:Name="mSourcesComboBox" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0"
+                                      SelectedItem="{Binding Source={StaticResource mMediaTypeManager}, Path=CurrentSource}" >
                 <ComboBox.ItemsSource>
                     <Binding Source="{StaticResource XmlLogProvider}"
                              XPath="//*[Source.Attributes/Attribute[@Name='MF_DEVSOURCE_ATTRIBUTE_MEDIA_TYPE']/Value.ValueParts/ValuePart[@Value='MFMediaType_Video']]"/>
@@ -59,11 +63,9 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
 
-            <ComboBox DataContext="{Binding ElementName=mSourcesComboBox, Path=SelectedItem}" x:Name="mStreamsComboBox"  VerticalAlignment="Center" Grid.Row="0" Grid.Column="1">
-                <ComboBox.ItemsSource>
-                    <Binding XPath="PresentationDescriptor/StreamDescriptor"
-                             />
-                </ComboBox.ItemsSource>
+            <ComboBox  ItemsSource="{Binding Source={StaticResource mMediaTypeManager}, Path=SubTypes}"              
+                           SelectedItem="{Binding Source={StaticResource mMediaTypeManager}, Path=CurrentSubType}"
+                       x:Name="mStreamsComboBox"  VerticalAlignment="Center" Grid.Row="0" Grid.Column="1">
                 <ComboBox.Style>
                     <Style>
                         <Style.Triggers>
@@ -79,35 +81,14 @@
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock x:Name="mtitleTextblock"/>
+                            <TextBlock Margin="0,0,2,0" Text="Format: "/>
+                            <TextBlock Text="{Binding {}, Converter={StaticResource mSubTypeNameConverter}}"/>
                         </StackPanel>
-                        <DataTemplate.Triggers>
-                            <DataTrigger Binding="{Binding XPath=@MajorType}" Value="MFMediaType_Video">
-                                <Setter TargetName="mtitleTextblock" Property="Text" >
-                                    <Setter.Value>
-                                        <Binding XPath="StreamDescriptor.Attributes/Attribute[@Name='MF_SD_STREAM_NAME']/SingleValue/@Value" />
-                                    </Setter.Value>
-                                </Setter>
-                            </DataTrigger>
-
-                            <DataTrigger Value="{x:Null}">
-                                <DataTrigger.Binding>
-                                    <Binding XPath="StreamDescriptor.Attributes/Attribute[@Name='MF_SD_STREAM_NAME']/SingleValue/@Value"/>
-                                </DataTrigger.Binding>
-                                <Setter TargetName="mtitleTextblock" Property="Text" Value="Video stream" />
-                            </DataTrigger>
-
-
-                        </DataTemplate.Triggers>
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
 
-            <ComboBox x:Name="mMediaTypesComboBox" DataContext="{Binding ElementName=mStreamsComboBox, Path=SelectedItem}" VerticalAlignment="Center" Grid.Row="0" Grid.Column="2">
-                <ComboBox.ItemsSource>
-                    <Binding XPath="MediaTypes/MediaType"
-                             />
-                </ComboBox.ItemsSource>
+            <ComboBox x:Name="mMediaTypesComboBox" ItemsSource="{Binding Source={StaticResource mMediaTypeManager}, Path=MediaTypes}" VerticalAlignment="Center" Grid.Row="0" Grid.Column="2">
 
                 <ComboBox.Style>
                     <Style>
@@ -151,7 +132,7 @@
                                 </Setter>
                                 <Setter TargetName="mVideoFormatTextblock" Property="Text">
                                     <Setter.Value>
-                                        <Binding XPath="MediaTypeItem[@Name='MF_MT_SUBTYPE']/SingleValue/@Value" />
+                                        <Binding XPath="MediaTypeItem[@Name='MF_MT_SUBTYPE']/SingleValue/@Value" Converter="{StaticResource mSubTypeNameConverter}" />
                                     </Setter.Value>
                                 </Setter>
                             </DataTrigger>

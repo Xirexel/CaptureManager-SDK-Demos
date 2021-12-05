@@ -223,12 +223,7 @@ namespace WPFViewerTrigger
             {
                 if (aSourceNode == null)
                     break;
-
-
-                if (aStreamNode == null)
-                    break;
-
-
+                               
                 if (aMediaTypeNode == null)
                     break;
 
@@ -249,21 +244,8 @@ namespace WPFViewerTrigger
                     break;
 
                 string lSymbolicLink = lNode.Value;
-
-                if (aStreamNode == null)
-                    break;
-
-                lNode = aStreamNode.SelectSingleNode("@Index");
-
-                if (lNode == null)
-                    break;
-
+                
                 uint lStreamIndex = 0;
-
-                if (!uint.TryParse(lNode.Value, out lStreamIndex))
-                {
-                    break;
-                }
 
                 if (aMediaTypeNode == null)
                     break;

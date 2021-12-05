@@ -149,16 +149,11 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Common\CaptureManagerLoader.h" />
-    <ClInclude Include="Common\CaptureManagerTypeInfo.h" />
-    <ClInclude Include="Common\ComPtrCustom.h" />
-    <ClInclude Include="Common\pugiconfig.hpp" />
-    <ClInclude Include="Common\pugixml.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Common\pugixml.cpp" />
+    <ClCompile Include="..\Common\pugixml.cpp" />
     <ClCompile Include="EVRVieweingAndRecording.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

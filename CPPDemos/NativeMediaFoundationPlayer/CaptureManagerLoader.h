@@ -2,7 +2,7 @@
 #include <Unknwnbase.h>
 #include <vector>
 
-#include "Common/ComPtrCustom.h"
+#include "../Common/ComPtrCustom.h"
 
 class CaptureManagerLoader
 {

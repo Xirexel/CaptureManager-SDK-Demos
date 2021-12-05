@@ -34,5 +34,8 @@
 [Oo]bj/
 [Pp]ackages/
 
+!CPPDemos/[Dd]ebug/
+!CPPDemos/[[Rr]elease/
+
 !CSharpDemos/3rdparty/openssl-1.1.0/lib*/*.lib
 CSharpDemos/.vs/

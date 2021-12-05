@@ -25,11 +25,6 @@ public:
 
 		do
 		{
-			lhresult = CoGetClassObject(lIDD, CLSCTX_INPROC_SERVER, nullptr, IID_PPV_ARGS(aPtrPtrIClassFactory));
-
-			if (SUCCEEDED(lhresult))
-				break;
-
 			if (mHCaptureManagerLibrary == nullptr)
 			{
 				mHCaptureManagerLibrary = LoadLibraryEx(L"CaptureManager.dll", NULL, 0);
@@ -37,8 +32,13 @@ public:
 				if (mHCaptureManagerLibrary == nullptr)
 				{
 					_tprintf(TEXT("Library CaptureManager.dll is not found\n"));
+					
+					lhresult = CoGetClassObject(lIDD, CLSCTX_INPROC_SERVER, nullptr, IID_PPV_ARGS(aPtrPtrIClassFactory));
 
-					return -1;
+					if (SUCCEEDED(lhresult))
+						break;
+
+					return lhresult;
 				}
 			}
 
