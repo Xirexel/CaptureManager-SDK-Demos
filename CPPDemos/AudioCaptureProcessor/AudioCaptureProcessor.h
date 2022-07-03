@@ -49,5 +49,7 @@ private:
 	std::unique_ptr<BYTE[]> mSilenceBlock;
 
 	WAVEFORMATEX* mPtrWAVEFORMATEX = nullptr;
+
+	HANDLE mAudioSamplesReadyEvent;
 };
 

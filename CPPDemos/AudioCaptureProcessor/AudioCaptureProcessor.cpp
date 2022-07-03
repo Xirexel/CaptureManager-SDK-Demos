@@ -4,7 +4,8 @@
 
 
 AudioCaptureProcessor::AudioCaptureProcessor():
-	mBlockAlign(0)
+	mBlockAlign(0),
+	mAudioSamplesReadyEvent(NULL)
 {
 }
 
@@ -63,13 +64,16 @@ HRESULT STDMETHODCALLTYPE AudioCaptureProcessor::start(
 
 		mAudioClient->Initialize(
 			AUDCLNT_SHAREMODE_SHARED,
-			AUDCLNT_STREAMFLAGS_LOOPBACK,
+			AUDCLNT_STREAMFLAGS_EVENTCALLBACK | AUDCLNT_STREAMFLAGS_LOOPBACK,
 			0,
 			0,
 			mPtrWAVEFORMATEX,
 			0
 			);
 
+		mAudioSamplesReadyEvent = CreateEventEx(NULL, NULL, 0, EVENT_MODIFY_STATE | SYNCHRONIZE);
+
+		lresult = mAudioClient->SetEventHandle(mAudioSamplesReadyEvent);
 
 		lresult = mAudioClient->GetService(IID_PPV_ARGS(&mAudioCaptureClient));
 
@@ -89,6 +93,12 @@ HRESULT STDMETHODCALLTYPE AudioCaptureProcessor::stop(void)
 {
 	if (mAudioClient)
 		mAudioClient->Stop();
+
+	if (mAudioSamplesReadyEvent)
+	{
+		CloseHandle(mAudioSamplesReadyEvent);
+		mAudioSamplesReadyEvent = NULL;
+	}
 
 	return S_OK;
 }
@@ -125,6 +135,55 @@ HRESULT STDMETHODCALLTYPE AudioCaptureProcessor::initilaize(
 
 		if (lInitilaize == nullptr)
 			break;
+
+
+
+		CComPtrCustom<IMMDeviceEnumerator> lMMDeviceEnumerator;
+
+		lresult = lMMDeviceEnumerator.CoCreateInstance(__uuidof(MMDeviceEnumerator));
+
+		if (!lMMDeviceEnumerator)
+			break;
+
+
+		CComPtrCustom<IMMDevice> lMMDevice;
+
+		CComPtrCustom<IAudioClient> lAudioClient;
+
+		lresult = lMMDeviceEnumerator->GetDefaultAudioEndpoint(
+			eRender,
+			eConsole,
+			&lMMDevice);
+
+		if (!lMMDevice)
+			break;
+
+		lresult = lMMDevice->Activate(
+			__uuidof(IAudioClient),
+			CLSCTX_ALL, NULL,
+			(void**)&lAudioClient);
+
+		if (!lAudioClient)
+			break;
+
+		lAudioClient->GetMixFormat(&mPtrWAVEFORMATEX);
+
+		lAudioClient->Initialize(
+			AUDCLNT_SHAREMODE_SHARED,
+			AUDCLNT_STREAMFLAGS_EVENTCALLBACK | AUDCLNT_STREAMFLAGS_LOOPBACK,
+			0,
+			0,
+			mPtrWAVEFORMATEX,
+			0
+		);
+
+		REFERENCE_TIME lhnsDefaultDevicePeriod;
+		
+		REFERENCE_TIME lnsMinimumDevicePeriod;
+
+		lAudioClient->GetDevicePeriod(
+			&lhnsDefaultDevicePeriod, 
+			&lnsMinimumDevicePeriod);
 
 		std::wstring lPresentationDescriptor;
 
@@ -169,7 +228,7 @@ HRESULT STDMETHODCALLTYPE AudioCaptureProcessor::initilaize(
 			lPresentationDescriptor +=		L"<SingleValue Value='True' />";
 			lPresentationDescriptor += L"</MediaTypeItem>";
 			lPresentationDescriptor += L"<MediaTypeItem Name='CM_DURATION_PERIOD' GUID='{63BCBEBB-03D3-4BF9-B233-AECCAE6E15E8}' Title='Source period duration.' Description='Duration in 100 nanoseconds.'>";
-			lPresentationDescriptor +=		L"<SingleValue Value='100000' />";
+			lPresentationDescriptor +=		L"<SingleValue Value='" + std::to_wstring(lhnsDefaultDevicePeriod) + L"' />";
 			lPresentationDescriptor += L"</MediaTypeItem>";			
 			lPresentationDescriptor += L"</MediaType>";
 			lPresentationDescriptor += L"</MediaTypes>";
@@ -202,80 +261,95 @@ HRESULT STDMETHODCALLTYPE AudioCaptureProcessor::sourceRequest(
 	HRESULT lresult(E_FAIL);
 
 
-
-	UINT32 lNextPacketSize = 0;
-
-	lresult = mAudioCaptureClient->GetNextPacketSize(&lNextPacketSize);
-
-	if (FAILED(lresult))
-		lNextPacketSize = 0;
-
-	lresult = S_OK;
-
-	if (lNextPacketSize > 0)
+	DWORD lWaitResult = WaitForMultipleObjects(1, &mAudioSamplesReadyEvent, FALSE, 100);
+	switch (lWaitResult)
 	{
-		BYTE* lPtrData;
+	case WAIT_OBJECT_0 + 0:
+	default:
+	{
 
-		UINT32 lNumFramesToRead = 0;
+		UINT32 lNextPacketSize = 0;
 
-		DWORD lFlags(0);
-
-		lresult = mAudioCaptureClient->GetBuffer(
-			&lPtrData,
-			&lNumFramesToRead,
-			&lFlags,
-			NULL,
-			NULL
-			);
+		lresult = mAudioCaptureClient->GetNextPacketSize(&lNextPacketSize);
 
 		if (FAILED(lresult))
+			lNextPacketSize = 0;
+
+		lresult = S_OK;
+
+		if (lNextPacketSize > 0)
 		{
-			lNumFramesToRead = 0;
-		}
-		else
-		{
-			if (lFlags & AUDCLNT_BUFFERFLAGS_SILENT)
+			BYTE* lPtrData;
+
+			UINT32 lNumFramesToRead = 0;
+
+			DWORD lFlags(0);
+
+			lresult = mAudioCaptureClient->GetBuffer(
+				&lPtrData,
+				&lNumFramesToRead,
+				&lFlags,
+				NULL,
+				NULL
+			);
+
+			if (FAILED(lresult))
 			{
+				lNumFramesToRead = 0;
 			}
 			else
 			{
-				if (lNumFramesToRead > 0)
+				if (lFlags & AUDCLNT_BUFFERFLAGS_SILENT)
 				{
+				}
+				else
+				{
+					if (lNumFramesToRead > 0)
+					{
 
-					CComQIPtrCustom<ISourceRequestResult> lISourceRequestResult;
+						CComQIPtrCustom<ISourceRequestResult> lISourceRequestResult;
 
-					lISourceRequestResult = aPtrISourceRequestResult;
+						lISourceRequestResult = aPtrISourceRequestResult;
 
-					if (lISourceRequestResult)
-						lISourceRequestResult->setData(lPtrData,
-						lNumFramesToRead * mBlockAlign, TRUE);
+						if (lISourceRequestResult)
+							lISourceRequestResult->setData(lPtrData,
+								lNumFramesToRead * mBlockAlign, TRUE);
 
+					}
 				}
 			}
+
+			lresult = mAudioCaptureClient->ReleaseBuffer(lNumFramesToRead);
+
+			lCount = 0;
 		}
-
-		lresult = mAudioCaptureClient->ReleaseBuffer(lNumFramesToRead);
-
-		lCount = 0;
-	}
-	else
-	{
-		++lCount;
-
-		if (lCount >= 2)
+		else
 		{
+			++lCount;
 
-			CComQIPtrCustom<ISourceRequestResult> lISourceRequestResult;
+			if (lCount >= 2)
+			{
 
-			lISourceRequestResult = aPtrISourceRequestResult;
+				CComQIPtrCustom<ISourceRequestResult> lISourceRequestResult;
 
-			if (lISourceRequestResult)
-				lISourceRequestResult->setData(mSilenceBlock.get(),
-					mSilenceBlockSize, TRUE);
+				lISourceRequestResult = aPtrISourceRequestResult;
 
-			--lCount;
+				if (lISourceRequestResult)
+					lISourceRequestResult->setData(mSilenceBlock.get(),
+						mSilenceBlockSize, TRUE);
+
+				--lCount;
+			}
+
 		}
-		
+	}
+	break;
+
+	case WAIT_TIMEOUT:
+	{
+	}
+	break;
+
 	}
 
 

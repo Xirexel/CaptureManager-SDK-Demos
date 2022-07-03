@@ -389,7 +389,7 @@ void OnPlayerEvent(HWND hwnd, WPARAM pUnkPtr)
 }
 
 
-void CALLBACK TimerIDRefresh(HWND hwnd, UINT uMsg, UINT idEvent, DWORD dwTime)
+void CALLBACK TimerIDRefresh(HWND hwnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime)
 {
 	if (hwnd != NULL)
 	{

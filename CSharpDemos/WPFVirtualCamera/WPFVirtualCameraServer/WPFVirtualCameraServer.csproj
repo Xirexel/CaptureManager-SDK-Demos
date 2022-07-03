@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{355AD88C-5865-41D1-84A0-072BAD763BEE}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>WPFVirtualCameraServer</RootNamespace>
+    <AssemblyName>WPFVirtualCameraServer</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\Bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CaptureManagerToCSharpProxy, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CaptureManager.1.21.0\lib\CaptureManagerToCSharpProxy.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Tools\CapturePipeline.cs" />
+    <Compile Include="Tools\Direct3D11Device.cs" />
+    <Compile Include="Tools\Interop\ComInterface.cs" />
+    <Compile Include="Tools\Interop\D3D11DeviceContext.cs" />
+    <Compile Include="Tools\Interop\D3D11Resource.cs" />
+    <Compile Include="Tools\Interop\D3D11Texture2D.cs" />
+    <Compile Include="Tools\Interop\Direct3D11.cs" />
+    <Compile Include="Tools\Interop\DXGIResource.cs" />
+    <Compile Include="Tools\Interop\NativeMethods.cs" />
+    <Compile Include="Tools\Interop\NativeStructs.cs" />
+    <Compile Include="Tools\SharedTexture.cs" />
+    <Compile Include="Tools\TargetTexture.cs" />
+    <Compile Include="UI\ComponentWindow.xaml.cs">
+      <DependentUpon>ComponentWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Server\AVirtualCameraServer.cs" />
+    <Compile Include="Server\IVirtualCameraServer.cs" />
+    <Compile Include="Server\VirtualCameraServer.cs" />
+    <Compile Include="COMUtil\COMHelper.cs" />
+    <Compile Include="COMUtil\ExeCOMServer.cs" />
+    <Compile Include="COMUtil\NativeMethod.cs" />
+    <Compile Include="UI\NotifyIconWpf\BalloonIcon.cs" />
+    <Compile Include="UI\NotifyIconWpf\Interop\BalloonFlags.cs" />
+    <Compile Include="UI\NotifyIconWpf\Interop\IconDataMembers.cs" />
+    <Compile Include="UI\NotifyIconWpf\Interop\IconState.cs" />
+    <Compile Include="UI\NotifyIconWpf\Interop\MouseEvent.cs" />
+    <Compile Include="UI\NotifyIconWpf\Interop\NotifyCommand.cs" />
+    <Compile Include="UI\NotifyIconWpf\Interop\NotifyIconData.cs" />
+    <Compile Include="UI\NotifyIconWpf\Interop\NotifyIconVersion.cs" />
+    <Compile Include="UI\NotifyIconWpf\Interop\Point.cs" />
+    <Compile Include="UI\NotifyIconWpf\Interop\TrayInfo.cs" />
+    <Compile Include="UI\NotifyIconWpf\Interop\WinApi.cs" />
+    <Compile Include="UI\NotifyIconWpf\Interop\WindowClass.cs" />
+    <Compile Include="UI\NotifyIconWpf\Interop\WindowMessageSink.cs" />
+    <Compile Include="UI\NotifyIconWpf\PopupActivationMode.cs" />
+    <Compile Include="UI\NotifyIconWpf\RoutedEventHelper.cs" />
+    <Compile Include="UI\NotifyIconWpf\TaskbarIcon.cs" />
+    <Compile Include="UI\NotifyIconWpf\TaskbarIcon.Declarations.cs" />
+    <Compile Include="UI\NotifyIconWpf\Util.cs" />
+    <Compile Include="UI\PositionFrame.xaml.cs">
+      <DependentUpon>PositionFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\VideoPanel\Interop\ComInterface.cs" />
+    <Compile Include="UI\VideoPanel\Interop\Direct3D9.cs" />
+    <Compile Include="UI\VideoPanel\Interop\Direct3D9Ex.cs" />
+    <Compile Include="UI\VideoPanel\Interop\Direct3DDevice9.cs" />
+    <Compile Include="UI\VideoPanel\Interop\Direct3DDevice9Ex.cs" />
+    <Compile Include="UI\VideoPanel\Interop\Direct3DSurface9.cs" />
+    <Compile Include="UI\VideoPanel\Interop\Direct3DTexture9.cs" />
+    <Compile Include="UI\VideoPanel\Interop\NativeMethods.cs" />
+    <Compile Include="UI\VideoPanel\Interop\NativeStructs.cs" />
+    <Compile Include="UI\VideoPanel\VideoPanel.cs" />
+    <Page Include="UI\ComponentWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\PositionFrame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Content\Images\Icon100x100.png" />
+    <Resource Include="Content\Images\Icon32x32.png" />
+    <Resource Include="Content\Images\Icon50x50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Content\Images\Icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon.ico" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -247,6 +247,8 @@ HRESULT DShowPlayer::UpdateVideoWindow(const LPRECT prc)
 
     if (m_pVideo)
     {
+		SetWindowPos(m_hwndVideo, HWND_TOP, prc->left, prc->top, prc->right, prc->bottom, 0);
+
         hr = m_pVideo->UpdateVideoWindow(m_hwndVideo, prc);
     }
 

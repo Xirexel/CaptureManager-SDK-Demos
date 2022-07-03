@@ -1,0 +1,132 @@
+﻿<Window x:Class="WPFVirtualCameraServer.UI.ComponentWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFVirtualCameraServer.UI"
+        xmlns:videoPanel="clr-namespace:WPFVirtualCameraServer.UI.VideoPanel"
+        xmlns:tb="clr-namespace:Hardcodet.Wpf.TaskbarNotification"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"    
+        WindowStyle="None"
+        ShowInTaskbar="False"
+        Visibility="Hidden"
+        Loaded="Window_Loaded"
+        Closing="Window_Closing"
+        Title="WPF Virtual Camera Server" Height="5" Width="5">
+    <Window.Resources>
+        <XmlDataProvider x:Key="XmlLogProvider" XPath="Sources/Source"/>
+    </Window.Resources>
+    <Grid>
+
+        <Viewbox Stretch="Uniform">
+            <Grid>
+                <videoPanel:VideoPanel  x:Name="m_VideoPanel"/>
+                <Canvas x:Name="m_PlayerCanvas" Width="{Binding ElementName=m_VideoPanel, Path=ActualWidth}" Height="{Binding ElementName=m_VideoPanel, Path=ActualHeight}">
+                    <local:PositionFrame x:Name="m_PositionFrame" Canvas.Top="0" Canvas.Left="0" Height="350" Width="600" />
+                </Canvas>
+            </Grid>
+        </Viewbox>
+        <tb:TaskbarIcon x:Name="mTaskbarIcon" TrayMouseDoubleClick="mTaskbarIcon_TrayMouseDoubleClick" IconSource="../Content/Images/Icon.ico">
+            <tb:TaskbarIcon.ContextMenu>
+                <ContextMenu x:Name="mSourceContextMenu">
+                    <ContextMenu.Resources>
+                        <ControlTemplate 
+                                          x:Key="{x:Static MenuItem.SubmenuItemTemplateKey}" 
+                                          TargetType="MenuItem">
+                            <RadioButton Margin="15,5" GroupName="SourceGroup" VerticalContentAlignment="Center">
+                                <RadioButton.Tag>
+                                    <Binding XPath="Source.Attributes/Attribute[@Name='MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE_VIDCAP_SYMBOLIC_LINK']/SingleValue/@Value" />
+                                </RadioButton.Tag>
+                                <ContentPresenter Margin="0,0,0,3"
+                                    ContentSource="Header"
+                                    RecognizesAccessKey="True">
+                                    <ContentPresenter.Content>
+                                        <Binding XPath="Source.Attributes/Attribute[@Name='MF_DEVSOURCE_ATTRIBUTE_FRIENDLY_NAME']/SingleValue/@Value" />
+                                    </ContentPresenter.Content>
+                                </ContentPresenter>
+                            </RadioButton>
+                        </ControlTemplate>
+
+                        <Style x:Key="{x:Type MenuItem}" TargetType="{x:Type MenuItem}">
+                            <Setter Property="OverridesDefaultStyle" Value="True"/>
+                            <Style.Triggers>
+                                <Trigger Property="Role" Value="TopLevelHeader">
+                                    <Setter Property="Template"
+                    Value="{StaticResource {x:Static MenuItem.TopLevelHeaderTemplateKey}}"/>
+                                    <Setter Property="Grid.IsSharedSizeScope" Value="true"/>
+                                </Trigger>
+                                <Trigger Property="Role" Value="TopLevelItem">
+                                    <Setter Property="Template"
+                    Value="{StaticResource {x:Static MenuItem.TopLevelItemTemplateKey}}"/>
+                                </Trigger>
+                                <Trigger Property="Role" Value="SubmenuHeader">
+                                    <Setter Property="Template"
+                     Value="{DynamicResource {x:Static MenuItem.SubmenuHeaderTemplateKey}}"/>
+                                </Trigger>
+                                <Trigger Property="Role" Value="SubmenuItem">
+                                    <Setter Property="Template"
+                    Value="{DynamicResource {x:Static MenuItem.SubmenuItemTemplateKey}}"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ContextMenu.Resources>
+                    <ContextMenu.ItemsSource>
+                        <Binding Source="{StaticResource XmlLogProvider}"
+                             XPath="//*[Source.Attributes/Attribute[@Name='MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE_VIDCAP_CATEGORY']/SingleValue[@Value='CLSID_WebcamInterfaceDeviceCategory'] or Source.Attributes/Attribute[@Name='MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE_VIDCAP_HW_SOURCE']/SingleValue[@Value='Software device']]"/>
+                    </ContextMenu.ItemsSource>
+                    <ContextMenu.Style>
+                        <Style TargetType="{x:Type ContextMenu}">
+                            <Setter Property="SnapsToDevicePixels" Value="True"/>
+                            <Setter Property="OverridesDefaultStyle" Value="True"/>
+                            <Setter Property="Grid.IsSharedSizeScope" Value="True"/>
+                            <Setter Property="HasDropShadow" Value="True"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type ContextMenu}">
+                                        <Border BorderThickness="1"
+                                                BorderBrush="Black"
+                                                Background="White">
+                                            <StackPanel Margin="0,5" IsItemsHost="True"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ContextMenu.Style>
+                    <!--<ContextMenu.ItemContainerStyle>
+                        <Style TargetType="MenuItem">
+                            <Setter Property="IsCheckable" Value="True"/>
+                        </Style>
+                    </ContextMenu.ItemContainerStyle>
+                    <ContextMenu.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock x:Name="mtitleTextblock" Tag=""/>
+                            </StackPanel>
+                            <DataTemplate.Triggers>
+                                <DataTrigger Binding="{Binding Path=Name}" Value="Source">
+                                    <Setter TargetName="mtitleTextblock" Property="Text">
+                                        <Setter.Value>
+                                            <Binding XPath="Source.Attributes/Attribute[@Name='MF_DEVSOURCE_ATTRIBUTE_FRIENDLY_NAME']/SingleValue/@Value" />
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter TargetName="mtitleTextblock" Property="ToolTip">
+                                        <Setter.Value>
+                                            <Binding XPath="Source.Attributes/Attribute[@Name='MF_DEVSOURCE_ATTRIBUTE_FRIENDLY_NAME']/SingleValue/@Description" />
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter TargetName="mtitleTextblock" Property="Tag">
+                                        <Setter.Value>
+                                            <Binding XPath="Source.Attributes/Attribute[@Name='MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE_VIDCAP_SYMBOLIC_LINK']/SingleValue/@Value" />
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                            </DataTemplate.Triggers>
+                        </DataTemplate>
+                    </ContextMenu.ItemTemplate>-->
+                </ContextMenu> 
+            </tb:TaskbarIcon.ContextMenu>
+        </tb:TaskbarIcon>
+    </Grid>
+</Window>

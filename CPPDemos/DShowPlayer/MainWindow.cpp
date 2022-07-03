@@ -148,6 +148,11 @@ LRESULT MainWindow::OnReceiveMessage(UINT message, WPARAM wParam, LPARAM lParam)
 }
 
 
+LRESULT CALLBACK VideoPanelProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+	return DefWindowProc(hwnd, uMsg, wParam, lParam);
+}
+
 //-----------------------------------------------------------------------------
 // MainWindow::OnCreate
 // Description: Called when the window is created.
@@ -282,12 +287,39 @@ HRESULT MainWindow::OnCreate()
 		hr = rebar.AddBand(volumeSlider.Window(), 2);
 	}
 
-
-
 	// Create the DirectShow player object.
 	if (SUCCEEDED(hr))
 	{
-		m_pPlayer = new DShowPlayer(m_hwnd);
+
+		WNDCLASS wcClass;
+
+		wcClass.lpszClassName = L"VideoPanelClass";
+		wcClass.hInstance = m_hInstance;
+		wcClass.lpfnWndProc = VideoPanelProc;// WndProc;
+		wcClass.hCursor = LoadCursor(NULL, IDC_ARROW);
+		wcClass.hIcon = NULL;
+		wcClass.lpszMenuName = NULL;
+		wcClass.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
+		wcClass.style = CS_HREDRAW | CS_VREDRAW;
+		wcClass.cbClsExtra = 0;
+		wcClass.cbWndExtra = 0;
+
+		RegisterClass(&wcClass);
+
+		auto lhWnd = CreateWindow(L"VideoPanelClass",
+			L"VideoPanel",
+			WS_CHILD | WS_CLIPCHILDREN | WS_VISIBLE | WS_CLIPSIBLINGS,
+			CW_USEDEFAULT,
+			CW_USEDEFAULT,
+			CW_USEDEFAULT,
+			CW_USEDEFAULT,
+			m_hwnd,
+			NULL,
+			m_hInstance,
+			NULL);
+
+
+		m_pPlayer = new DShowPlayer(lhWnd);
 		if (m_pPlayer == NULL)
 		{
 			hr = E_OUTOFMEMORY;

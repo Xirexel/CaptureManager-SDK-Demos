@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32616.157
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualCameraDShowFilter", "VirtualCameraDShowFilter\VirtualCameraDShowFilter.csproj", "{96555BD9-6C98-4A24-A028-1DA79538393B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFVirtualCameraServer", "WPFVirtualCameraServer\WPFVirtualCameraServer.csproj", "{355AD88C-5865-41D1-84A0-072BAD763BEE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{96555BD9-6C98-4A24-A028-1DA79538393B} = {96555BD9-6C98-4A24-A028-1DA79538393B}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{96555BD9-6C98-4A24-A028-1DA79538393B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96555BD9-6C98-4A24-A028-1DA79538393B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96555BD9-6C98-4A24-A028-1DA79538393B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96555BD9-6C98-4A24-A028-1DA79538393B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{355AD88C-5865-41D1-84A0-072BAD763BEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{355AD88C-5865-41D1-84A0-072BAD763BEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{355AD88C-5865-41D1-84A0-072BAD763BEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{355AD88C-5865-41D1-84A0-072BAD763BEE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A9B27B3E-75B3-470F-A89D-38A27FFE1027}
+	EndGlobalSection
+EndGlobal

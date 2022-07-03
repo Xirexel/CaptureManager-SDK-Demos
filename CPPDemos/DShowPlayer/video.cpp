@@ -412,7 +412,7 @@ done:
 
 		if (lEVRStreamControl)
 		{
-			lEVRStreamControl->setPosition(lOutputNodes[0], 0, 0.5f, 0.25f, 0.5f);
+			//lEVRStreamControl->setPosition(lOutputNodes[0], 0, 0.5f, 0.25f, 0.5f);
 		}
 	}
 
