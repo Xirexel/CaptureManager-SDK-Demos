@@ -284,7 +284,7 @@ namespace WPFAreaScreenRecorderAsync
                 return;
             }
 
-            getEncoderInfo();
+            await getEncoderInfo();
 
             List<object> lCompressedMediaTypeList = new List<object>();
 
@@ -450,7 +450,7 @@ namespace WPFAreaScreenRecorderAsync
             return aSymbolicLink + loptions;
         }
 
-        private async void getEncoderInfo()
+        private async Task getEncoderInfo()
         {
             XmlDocument doc = new XmlDocument();
 
